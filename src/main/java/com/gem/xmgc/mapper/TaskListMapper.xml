@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.TaskListMapper">
+    <select id="selectTaskListById" resultType="tasklist">
+        select * from taskdetail t1 join tasklist t2 on t1.task_id=t2.id where t1.t_id =#{id} and t1.statu=0
+    </select>
+    <select id="selectAllTaskByTid" resultType="tasklist">
+        select t.*,s.s_name from secondlevel s, tasklist t join taskdetail td on t.id=td.task_id where td.t_id=#{id} and t.statu=0  group by t.id
+    </select>
+    <select id="selectByLevel" resultType="tasklist">
+        select t.*,te.t_name from tasklist t join secondlevel s on t.s_level=s.id join firstlevel f on s.f_id=f.id join teacher te
+        on t.tea_id=te.id join subjecttype st on f.type_id=st.id
+        <where>
+            <if test="sid!=null and sid!=''">
+                s.id=#{sid}
+            </if>
+            <if test="fid!=null and fid!=''">
+                and f.id=#{fid}
+            </if>
+            <if test="subjectId!=null and subjectId!=''">
+                and st.id=#{subjectId}
+            </if>
+            and t.statu=0
+        </where>
+    </select>
+</mapper>

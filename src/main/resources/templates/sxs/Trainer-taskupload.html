@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:CheckBox="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作业上传</title>
+    <div th:replace="commons::header"></div>
+</head>
+<body>
+<div class="x-nav">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.reload();" title="刷新">
+        <i class="layui-icon" style="line-height:30px">刷新</i></a>
+</div>
+<div class="x-body" >
+    <div class="layui-row" >
+        <form class="layui-form layui-col-md12 layui-form-pane">
+            <div class="layui-form-item" id="x-city">
+                <div class="layui-input-inline">
+                    <input class="layui-select"  autocomplete="off" placeholder="" disabled="true" id="subject" lay-filter="subject"/>
+                </div>
+                <div class="layui-input-inline" >
+                    <select  placeholder="一级模块" name="firstlevel" lay-filter="select" id="firstlevel"/>
+                    <option>请选择一级模块</option>
+                    <option v-for="f in first" v-bind:value="f.id">{{f.firstName}}</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select  lay-filter="secondLevel"  placeholder="二级模块"  name="secondlevel" id="secondlevel" />
+                    <option>请选择二级模块</option>
+                    </select>
+                </div>
+         </div>
+        </form>
+ </div> <xblock>
+    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>确认上传</button>
+    <button class="layui-btn" onclick="x_admin_show('添加题目','/task/v/add')" ><i class="layui-icon"></i>添加题目</button>
+</xblock>
+
+    <div id="list">
+        <table class="layui-table x-admin">
+            <thead>
+            <tr>
+                <th></th>
+                <th>编号</th>
+                <th>题目</th>
+                <th>出题老师</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tr th:each="task,status:${tasklist}" >
+            <td>
+               <input th:type="checkbox" th:id="${task.id}" th:onclick="getId(id)" lay-skin="primary">
+            </td>
+                <td>[[${task.id}]]</td>
+                <td th:utext="${task.question}"></td>
+                <td>[[${task.tname}]]</td>
+                <td class="td-manage">
+                    <input class="layui-btn" type="button" value="题目详情" th:id="${task.id}" onclick="x_admin_show('修改题目','/task/list/'+id)"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    var vue = new Vue({
+        el:"#firstlevel",
+        data:{
+            first:null
+        }
+    })
+    $.ajax({
+            url: base+'/task/tasklist',
+            method: 'post',
+            async: false,
+            success:function (data) {
+                $("#subject").attr('placeholder',data[0].subjectName)
+                vue.first=data;
+            }});
+    $("#list").load(base+'/task/byFirstLevel');
+    layui.use('form', function () {
+        var form = layui.form;
+        form.on('select(select)', function () {
+            var firstType = $("#firstlevel").val()
+            $.ajax({
+                url: base + "/task/secondLevels/"+firstType,
+                method: "post",
+                async: false,
+                success: function (data) {
+                    $("#secondlevel").empty().html("<option>请选择二级模块</option>");
+                    $.each(data, function (j, obj) {
+                        $("#secondlevel").append("<option value='"+obj.id+"'>" + obj.sname + "</option>")
+                    })
+                    form.render();
+                }
+            })
+        });
+    });
+    layui.use('form', function () {
+        var form = layui.form;
+        form.on('select(secondLevel)', function () {
+            var data={
+                firstType:$("#firstlevel").val(),
+                secondType:$("#secondlevel").val()
+            }
+            $("#list").load(base+'/task/byFirstLevel',data);
+        });
+    });
+    //定义set集合,将题目id传入
+    var set = new Set([]);
+    function getId(obj) {
+        //has方法可以判断是否重复
+        if(set.has(obj)) {
+            set.delete(obj);
+        }
+        else{
+            set.add(obj);
+        }
+    }
+    function delAll () {
+        var s = [];
+        set.forEach(function (element) {
+            s.push(element);
+        });
+        layer.confirm('确认要上传吗？',function(index){
+            //捉到所有被选中的，发异步进行上传题目
+            $.ajax({
+                url:base+"/task/uploadTask",
+                method:'post',
+                data : {sets:s},
+                traditional:true,
+                success:function (data) {
+                    layer.msg(data, {icon: 1});
+                }
+            })
+        });
+    }
+</script>
+</body>
+</html>

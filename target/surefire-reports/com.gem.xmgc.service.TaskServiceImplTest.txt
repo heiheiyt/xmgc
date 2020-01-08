@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------
+Test set: com.gem.xmgc.service.TaskServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.981 s <<< FAILURE! - in com.gem.xmgc.service.TaskServiceImplTest
+findTaskByOtherTest(com.gem.xmgc.service.TaskServiceImplTest)  Time elapsed: 0.005 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: 
+nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT t1.*, t2.t_name FROM task t1 JOIN teacher t2 WHERE t1.statu = 0 AND t1.c_id = ? AND ? BETWEEN date_format(t1.t_set_time, '%Y-%m-%d') AND date_format(t1.t_stop_time, '%Y-%m-%d') GROUP BY t1.id ) TOTAL 
+
+### The error may exist in file [C:\Users\90479\Desktop\xmgc1\xmgc\target\classes\com\gem\xmgc\mapper\TaskMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT t1.*, t2.t_name FROM task t1 JOIN teacher t2 WHERE t1.statu = 0 AND t1.c_id = ? AND ? BETWEEN date_format(t1.t_set_time, '%Y-%m-%d') AND date_format(t1.t_stop_time, '%Y-%m-%d') GROUP BY t1.id ) TOTAL 
+
+	at com.gem.xmgc.service.TaskServiceImplTest.findTaskByOtherTest(TaskServiceImplTest.java:35)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+
+### Error querying database.  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT t1.*, t2.t_name FROM task t1 JOIN teacher t2 WHERE t1.statu = 0 AND t1.c_id = ? AND ? BETWEEN date_format(t1.t_set_time, '%Y-%m-%d') AND date_format(t1.t_stop_time, '%Y-%m-%d') GROUP BY t1.id ) TOTAL 
+
+### The error may exist in file [C:\Users\90479\Desktop\xmgc1\xmgc\target\classes\com\gem\xmgc\mapper\TaskMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT t1.*, t2.t_name FROM task t1 JOIN teacher t2 WHERE t1.statu = 0 AND t1.c_id = ? AND ? BETWEEN date_format(t1.t_set_time, '%Y-%m-%d') AND date_format(t1.t_stop_time, '%Y-%m-%d') GROUP BY t1.id ) TOTAL 
+
+	at com.gem.xmgc.service.TaskServiceImplTest.findTaskByOtherTest(TaskServiceImplTest.java:35)
+Caused by: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: 
+Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT t1.*, t2.t_name FROM task t1 JOIN teacher t2 WHERE t1.statu = 0 AND t1.c_id = ? AND ? BETWEEN date_format(t1.t_set_time, '%Y-%m-%d') AND date_format(t1.t_stop_time, '%Y-%m-%d') GROUP BY t1.id ) TOTAL 
+
+	at com.gem.xmgc.service.TaskServiceImplTest.findTaskByOtherTest(TaskServiceImplTest.java:35)
+Caused by: java.sql.SQLSyntaxErrorException: Expression #9 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.t2.t_name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+	at com.gem.xmgc.service.TaskServiceImplTest.findTaskByOtherTest(TaskServiceImplTest.java:35)
+

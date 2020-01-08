@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>学生成绩</title>
+      <div th:replace="commons::header"></div>
+  </head>
+  <body>
+    <div class="x-body">
+       <!-- <i class="layui-text" th:if="${titleList}==null">该试卷没有题目</i>-->
+        <from>
+		<!--<xblock>
+			<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+	    </xblock>-->
+        <table class="layui-table x-admin">
+          <thead>
+            <tr>
+             <!-- <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+              </th>-->
+                <th>序号</th>
+              <th>试卷名称</th>
+              <th>成绩</th>
+			  </tr>
+          </thead>
+          <tbody>
+            <tr th:each="s,status:${scoreList}">
+                <td>[[${status.count}]]</td>
+			  <td>[[${s.pname}]]</td>
+			  <td th:if="${s.score}<60" class="x-red">[[${s.score}]]</td>
+			  <td th:if="${s.score}>=60">[[${s.score}]]</td>
+            </tr>
+          </tbody>
+        </table>
+		</from>
+    </div>
+  </body>
+</html>

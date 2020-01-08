@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>题目详情</title>
+    <div th:replace="commons::header"></div>
+</head>
+<body>
+    <div class="x-body">
+        <table class="layui-table x-admin">
+          <thead>
+            <tr>
+                <th>序号</th>
+                <th>编号</th>
+                <th>题目</th>
+                <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          <!--？？？？只显示一行？？？-->
+            <tr th:each="task,status:${taskList}">
+                <td>[[${status.count}]]</td>
+                <td width="30px">[[${task.id}]]</td>
+              <td th:utext="${task.question}"></td>
+			  <td>
+                  <a title="修改题目" th:id="${task.id}" onclick="x_admin_show('修改题目','/task/list/'+id)" href="javascript:;">
+                      <i class="layui-icon">&#xe63c;</i>
+                  </a>
+                  <a title="删除" th:id="${task.id}" onclick="Tasklist_del(id,'要删除的id')" href="javascript:;">
+                      <i class="layui-icon">&#xe640;</i>
+                  </a>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+          //自定义验证规则
+          //监听提交
+          form.on('submit(add)', function(data){
+            console.log(data);
+            //发异步，把数据提交给php
+            layer.alert("修改成功", {icon: 6},function () {
+                //关闭当前frame
+                x_admin_close();
+                // 可以对父窗口进行刷新 
+                x_admin_father_reload();
+            });
+            return false;
+          });
+        });
+        function Tasklist_del(obj) {
+            var d = {
+                tasklistid:obj
+            }
+            $.ajax({
+                url:base+"/task/tasklist/detele",
+                data:d,
+                type:'post',
+                success:function (data) {
+                    if(data==1){
+                        layer.alert("删除成功", {icon: 6},function () {
+                            location.reload()
+                        });
+                    }
+                    else{
+                        layer.alert("删除失败", {icon: 5},function () {
+                            location.reload()
+                        });
+                    }
+
+                }
+            })
+        }
+    </script>
+  </body>
+
+</html>

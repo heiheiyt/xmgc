@@ -1,0 +1,12 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.TitleListMapper">
+<select id="selectTitleById" resultType="titlelist">
+        select t.* from titlelist t  JOIN paperdetail p on p.t_id = t.id where p.p_id = #{id} group by t.id
+    </select>
+
+    <select id="selectTitleByPId" resultType="titlelist" parameterType="int">
+        select t.* from titlelist t  JOIN paperdetail p on p.t_id = t.id where p.p_id = #{id} and t.statu=0 group by t.id
+    </select>
+</mapper>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html  class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>考试系统平台</title>
+    <div th:replace="commons::header"></div>
+</head>
+<body class="login-bg">
+    
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">项目工厂管理登录</div>
+        <div id="darkbannerwrap"></div>
+        
+        <form method="post" class="layui-form" action="student-index.html">
+
+            <p th:if="${param.info}" align="center" style="color: red;font-size: 20px;font-weight: bold">请先登录...</p>
+            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input onclick="a()" id="aaa" name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+			<select id="check" th:name="check">
+				<option value="admin">管理员</option>
+				<option value="eduadmin">教务</option>
+				<option value="trainer">实训师</option>
+				<option value="headteacher">班主任</option>
+				<option value="xmadmin">项目管理员</option>
+			</select>
+			<div id="aaa"></div>
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <hr class="hr20" >
+        </form>
+    </div>
+
+    <script>
+        $(function () {
+            layui.use('form', function () {
+                var form = layui.form;
+                //监听提交
+                form.on('submit(login)', function (data) {
+                    layer.msg("正在登录...", function () {
+                        $.post("/xmgc/account/login", data.field, function (data) {
+                            if (data=="admin") {window.location = base + "/l/login";
+
+                            }else if(data=="xmadmin"){
+                                window.location=base+"/l/loginxmadmin";
+                            }else if(data=="eduadmin"){
+                                window.location=base+"/l/loginjw";
+                            }else if(data=="trainer"){
+                                window.location=base+"/l/loginsxs";
+                            }else if(data=="headteacher"){
+                                window.location=base+"/l/loginbzr?cid="
+                            }
+
+                            else {
+                                layer.msg("用户名或者密码有误!", function () {
+                                    $("#lu").val("").focus();
+                                    $("#lp").val("");
+                                });
+                            }
+                        });
+                    });
+                    return false;
+                });
+            });
+        })
+    </script>
+	<script>
+		$(document).ready(function(){
+		  $("#check").change(function(){
+			   alert("a");
+			  var a = this.value;
+			  alert(a);
+			if(a == 'trainer'){
+			alert("a");
+			var a = document.createElement("select");
+			var opt1 = document.createElement("option");
+			opt1.innerText = "JAVA";
+			var opt2 = document.createElement("option");
+			opt2.innerText = "前段";
+			a.appendChild(opt1);
+			a.appendChild(opt2);
+			$("#aaa").append(a);
+			}
+		  });
+		});
+	</script>
+</body>
+</html>

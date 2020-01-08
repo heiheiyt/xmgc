@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <div th:replace="commons::header"></div>
+</head>
+
+<body>
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body" id="wenJuan">
+    <div class="layui-row bd-border ">
+        <div class="layui-input-inline">
+            <label class="layui-form-label">选择文件：&nbsp;</label>
+            <div class="layui-input-inline" style="width: 150px;">
+                <button type="button" class="layui-btn" id="test1">
+                    <i class="layui-icon">&#xe67c;</i>选择
+                </button>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                </label>
+                <button class="layui-btn bd-btn-radius layui-btn-normal" id="submit">导入数据</button>
+            </div>
+        </div>
+    </div>
+    <xblock>
+        <button class="layui-btn" onclick="x_admin_show('添加测试','/addQuestionnaire')"><i class="layui-icon"></i>创建/发布问卷
+        </button>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                        class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>问卷名</th>
+            <th>班级</th>
+            <th>时间</th>
+            <td>状态</td>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="wenJuanPlan in wenJuanPlan">
+            <th></th>
+            <th>{{wenJuanPlan.tname}}</th>
+            <th>{{wenJuanPlan.cid}}</th>
+            <th>{{wenJuanPlan.usedate}}</th>
+            <th>{{wenJuanPlan.name}}</th>
+            <th>
+                <button class="layui-btn" v-bind:id="wenJuanPlan.tname"
+                        onclick="x_admin_show('添加测试','/questionsubject?name='+id)"><i class="layui-icon"></i>查看问卷
+                </button>
+                <button class="layui-btn" v-bind:id="wenJuanPlan.id"
+                        onclick="x_admin_show('添加测试','/updateQuestionnaire/'+id)"><i class="layui-icon"></i>修改问卷计划
+                </button>
+                <button v-bind:id="wenJuanPlan.id" onclick="member_del(this,id)"
+                        class="layui-btn-danger layui-btn layui-btn-xs">删除
+                </button>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+    <div class="page">
+        <div>
+            <a class="prev" v-bind:id="1" href="#" onclick="questionInfo(id)">&lt;&lt;</a>
+            <a href="#" v-bind:id="pageCurrent-1" v-if="pageCurrent-1>0" onclick="questionInfo(id)">{{pageCurrent-1}}</a>
+            <span class="current">{{pageCurrent}}</span>
+            <a href="#" v-bind:id="pageCurrent+1" v-if="pageCurrent+1<=pageTotal" onclick="questionInfo(id)">{{pageCurrent+1}}</a>
+            <a class="next" v-bind:id="pageTotal" v-if="pageCurrent+2<=pageTotal" onclick="questionInfo(id)" href="#">&gt;&gt;</a>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        layui.use('upload', function () {
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#test1' //绑定元素
+                , url: base + "/upLoadExcel"//上传接口
+                , done: function (res) {
+                    //上传完毕回调
+                    alert(res);
+                }
+                , error: function () {
+                    //请求异常回调
+                    alert(111);
+                },
+                  exts: 'xls|xlsx|xlsm|xlt|xltx|xltm'
+                , accept: 'file'//允许的文件类型
+                , auto: false//选择文件后是否自动上传
+                , bindAction: '#submit',
+                multiple: true
+            });
+        });
+    });
+
+
+    var vue = new Vue({
+        el: '#wenJuan',
+        data: {
+            wenJuanPlan: null,
+            pageCurrent: null,
+            pageTotal: null
+        }
+    });
+    $.ajax({
+        url: base + "/wenJuanPlan",
+        method: "POST",
+        async: false,
+        success: function (data) {
+            vue.wenJuanPlan = data.records;
+            vue.pageCurrent = data.current;
+            vue.pageTotal = data.pages;
+        }
+    })
+
+    function questionInfo(obj) {
+        var param = {
+            pageCurrent: obj,
+        }
+        $.ajax({
+            url: base + "/wenJuanInfos",
+            data: param,
+            method: "post",
+            async: false,
+            success: function (data) {
+                vue.wenJuanPlan = data.records;
+                vue.pageCurrent = data.current;
+                vue.pageTotal = data.pages;
+            }
+        })
+    }
+
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form
+            , layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 5) {
+                    return '昵称至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , repass: function (value) {
+                if ($('#L_pass').val() != $('#L_repass').val()) {
+                    return '两次密码不一致';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(upload)', function (data) {
+            layer.msg("正在添加...", function () {
+                alert($("#file").val())
+                $.ajax({
+                    url: base + "/upLoadExcel",
+                    data: data.field,
+                    contentType: false,
+                    processData: false,
+                    method: "post",
+                    success: function (data) {
+                        if (data) {
+                            layer.alert("增加成功", {icon: 6}, function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                            });
+                        }
+                    }
+                });
+            });
+            return false;
+        });
+
+
+    });
+
+
+    /*用户-删除*/
+    function member_del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            //发异步删除数据
+            $.ajax({
+                url: base + "/wenJuanPlanRemove",
+                method: "POST",
+                async: false,
+                success: function (data) {
+                    if (data) {
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                    }
+                }
+            })
+        });
+    }
+</script>
+</body>
+
+</html>

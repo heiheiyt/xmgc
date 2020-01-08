@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <table class="layui-table">
+        <thead>
+          <tr>
+              <th>序号</th>
+            <th>学生ID</th>
+            <th>试卷名称</th>
+            <th>成绩</th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr th:each="grade,status:${grades}">
+            <td>[[${status.count}]]</td>
+            <td>[[${grade.sId}]]</td>
+            <td>[[${grade.usePaperName}]]</td>
+            <td>[[${grade.score}]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+</html>

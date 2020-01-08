@@ -1,0 +1,209 @@
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>欢迎页面-X-admin2.1</title>
+      <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">学生情况</a>
+        <a><cite>违纪</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+			<input class="layui-input"  autocomplete="off" placeholder="时间" name="time" id="time">
+			<input id="studentName" type="text" name="username"  placeholder="请输入姓名" autocomplete="off" class="layui-input">
+			<div class="layui-input-inline">
+				<select  id="type" name="contrller">
+                    <option></option>
+					<option>迟到</option>
+					<option>旷课</option>
+				</select>
+			</div>
+			<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+		</div>
+      </div>
+      <xblock id="class-id">
+		  <button v-if="classid!=''" onclick="x_admin_show('录入违纪','/headTeacher/wj-add?cid='+cid,600,400)" class="layui-btn">录入</button>
+          <form style="display: inline-block" class="layui-form" enctype="multipart/form-data" th:action="@{/headTeacher/discipline/downLoad}" method="post">
+              <input type="hidden" name="type" value="Discipline"/>
+              <input type="hidden" id="cid" name="cid" value=""/>
+              <input type="hidden" name="excelName" value="Discipline"/>
+              <input type="hidden" name="excel" value="学生违纪"/>
+              <input type="hidden" name="sheet" value="disciplineList"/>
+              <input class="layui-btn" type="submit"  value="下载"/>
+          </form>
+		  <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+<!--        <span class="x-right" style="line-height:40px">共有数据：88 条</span>-->
+      </xblock>
+      <table class="layui-table x-admin" id="disciplines-data">
+        <thead>
+          <tr>
+            <th>
+<!--                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>-->
+            </th>
+            <th>时间</th>
+            <th>姓名</th>
+            <th>违纪状态</th>
+			<th>分数</th>
+			<th>备注</th>
+			<th>操作</th>
+          </tr>
+        </thead>
+          <tbody>
+          <tr v-for="discipline in disciplines" v-bind:id="discipline.id">
+            <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" v-bind:data-id='discipline.id'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+              <td>{{discipline.createTime}}</td>
+              <td>{{discipline.sname}}</td>
+              <td>{{discipline.type}}</td>
+              <td>{{discipline.score}}</td>
+              <td>{{discipline.remarks}}</td>
+			<td class="td-manage">
+				<button v-bind:id="discipline.id" class="layui-btn" onclick="x_admin_show('修改','/headTeacher/wj-edit?id='+id,600,400)">修改</button>
+				<button class="layui-btn layui-btn-danger" onclick="member_del(this,'要删除的id')">删除</button>
+			</td>
+          </tr>
+        </tbody>
+      </table>
+        <div th:replace="bzr/page::footer"></div>
+    </div>
+        <script>
+            var cid = $("#clazzId",parent.document).attr('value');
+        var vue = new Vue({
+            el: '#disciplines-data',
+            data: {
+                disciplines: null
+            }
+        });
+
+            var vue2 = new Vue({
+                el: '#class-id',
+                data: {
+                    classid: null,
+                }
+            });
+            function getQueryVariable(variable)
+            {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    if(pair[0] == variable){return pair[1];}
+                }
+                return(false);
+            }
+        $.ajax({
+            type : "post",
+            data: {'id':$("#clazzId",parent.document).attr('value'),'studentName':$("#studentName").val(),'date':$('#time').val(),'type':$("#type").val()},
+            url : base + '/headTeacher/discipline/list',
+            async: false,
+            success :function (data) {
+                vue.disciplines = data.records;
+                vue1.current = data.current;
+                vue1.pages = data.pages;
+                vue2.classid = $("#clazzId",parent.document).attr('value');
+            }
+        });
+        $("#cid").val($("#clazzId",parent.document).attr('value'));
+        $("#page-data").on('click','a',function () {
+            $.ajax({
+                type : "post",
+                data: {'id':$("#clazzId",parent.document).attr('value'),'current':this.id,'studentName':$("#studentName").val(),'date':$('#time').val(),type:$("#type").val()},
+                url : base + '/headTeacher/discipline/list',
+                async: true,
+                success :function (data) {
+                    vue.disciplines = data.records;
+                    vue1.current = data.current;
+                    vue1.pages = data.pages;
+                }
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#time' //指定元素
+            });
+        });
+
+
+
+        /*用户-删除*/
+        function member_del(obj,id){
+            layer.confirm('确认要删除吗？',function(index){
+                //发异步删除数据
+                $.ajax({
+                    type : "post",
+                    //获取父级元素tr的id
+                    data: {'id':$(obj).parents("tr").attr("id")},
+                    url : base + '/headTeacher/discipline/remove',
+                    async: false,
+                    success :function (data) {
+                        $(obj).parents("tr").remove();
+                        location.replace(location.href);
+                    }
+                });
+                layer.msg('已删除!',{icon:1,time:1000});
+            });
+        }
+
+
+
+        function delAll (argument) {
+
+            var data = tableCheck.getData();
+            layer.confirm('确认要删除吗？'+data,function(index){
+                $.ajax({
+                    type : "get",
+                    //获取父级元素tr的id
+                    data: {'ids':data},
+                    url : base + '/headTeacher/discipline/removeBatch',
+                    async: false,
+                    success :function (data) {
+                        location.replace(location.href);
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                    }
+                });
+                layer.msg('删除成功', {icon: 1});
+            });
+        }
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <script>
+        layui.use(['form','layer'], function() {
+            $=layui.jquery;
+            var form = layui.form;
+            layer=layui.layer;
+            //监听提交
+            form.on('submit(sreach)',function (data) {
+                console.log(data)
+                $.ajax({
+                    url : base + "/headTeacher/discipline/search",
+                    data:{'id':$("#clazzId",parent.document).attr('value'),'studentName':$("#studentName").val(),'date':$('#time').val(),type:$("#type").val()},
+                    method: "get",
+                    success: function (data) {
+                        vue.disciplines = data.records;
+                        vue1.current = data.current;
+                        vue1.pages = data.pages;
+                    }
+                })
+            });
+        });
+    </script>
+  </body>
+
+</html>

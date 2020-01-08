@@ -1,0 +1,23 @@
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="footer">
+    <div class="page">
+        <div id="page-data">
+            <a class="num" v-if="current!=1" id="1">首页</a>
+            <a class="prev" v-if="current!=1&&current" v-bind:id="current-1">&lt;&lt;</a>
+            <a class="num" v-if="current!=1" v-bind:id="current-1">{{current-1}}</a>
+            <span class="current" v-bind:id="current">{{current}}</span>
+            <a class="num" v-if="current!=pages" v-bind:id="current+1">{{current+1}}</a>
+            <a class="next" v-if="current!=pages" v-bind:id="current+1">&gt;&gt;</a>
+            <a class="num" v-if="current!=pages" v-bind:id="pages">尾页</a>
+        </div>
+    </div>
+    <script>
+        var vue1 = new Vue({
+            el: '#page-data',
+            data: {
+                current: null,
+                pages: null
+            }
+        });
+    </script>
+</div>

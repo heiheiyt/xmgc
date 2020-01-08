@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>修改题目内容</title>
+      <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <div id="ed" class="text"></div>
+        <form class="layui-form layui-col-md12 layui-form-pane">
+        <!--隐藏域用来保存富文本编辑器中的内容-->
+            <input type="hidden" name="question" id="content">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input class="layui-select"  autocomplete="off" placeholder="" disabled="true" id="subject" name="subject"/>
+                </div>
+                <div class="layui-input-inline">
+                    <select  placeholder="一级模块" name="firstlevel" id="firstlevel" lay-filter="select"/>
+                    <option >请选择一级模块</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select  lay-filter="secondLevel"  placeholder="二级模块"  id="secondlevel" name="secondlevel"/>
+                    <option >请选择二级模块</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select  placeholder="题目类型" name="type" id="titletype" lay-filter="type"/>
+                    <option value="0">请选择题目类型</option>
+                    </select>
+                </div>
+            </div>
+            <button  class="layui-btn" lay-filter="add" lay-submit>
+                确认添加
+            </button>
+        </form>
+
+
+    </div>
+
+    <script type="text/javascript" th:inline="javascript">
+        $(function () {
+            //页面加载完毕后,创建富文本编辑器
+            var E = window.wangEditor;
+            var editor = new E('#ed');
+            // 上传图片到服务器
+            // 默认200ms自动同步富文本编辑器中内容到隐藏域中
+
+            editor.customConfig.onchange = function (html) {
+                // html 即变化之后的内容
+                $("#content").val(html);
+            };
+            editor.customConfig.menus = []
+            editor.create();
+        });
+  </script>
+  <script>
+      $.ajax({
+          url: base+'/task/tasklist',
+          method: 'post',
+          async: true,
+          success:function (data) {
+              $("#subject").empty().html("<option>请选择一级模块</option>");
+              $('#subject').attr('placeholder',data[0].subjectName);
+              $.each(data,function (j,obj) {
+                  $("#firstlevel").append("<option value='"+obj.id+"'>" + obj.firstName+ "</option>")
+              })
+          }
+      });
+      $.ajax({
+          url:base+'/task/titletype',
+          method:'get',
+          success:function (data) {
+              $.each(data,function (j,obj) {
+                  $("#titletype").append("<option value='"+obj.id+"'>"+obj.name+"</option>")
+              })
+          }
+      })
+
+      layui.use('form', function () {
+          var form = layui.form;
+          form.on('select(select)', function () {
+              var firstType = $("#firstlevel").val()
+              $.ajax({
+                  url: base + "/task/secondLevels/"+firstType,
+                  method: "Post",
+                  async: false,
+                  success: function (data) {
+                      $("#secondlevel").empty().html("<option>请选择二级模块</option>");
+                      $.each(data, function (j, obj) {
+                          $("#secondlevel").append("<option value='"+obj.id+"'>" + obj.sname + "</option>")
+                      })
+                      form.render();
+                  }
+              })
+          });
+      });
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+          var form = layui.form
+              ,layer = layui.layer;
+          //自定义验证规则
+          //监听提交
+          form.on('submit(add)', function(data){
+              console.log(data);
+              $.ajax({
+                  url:base+'/task/list/add',
+                  method:'post',
+                  data:data.field,
+                  success:function (data) {
+                      // 可以对父窗口进行刷新
+                      x_admin_father_reload();
+                      if (data==1){
+                          layer.msg("添加成功", {icon: 6},function () {
+                              // 获得frame索引
+                              var index = parent.layer.getFrameIndex(window.name);
+                              //关闭当前frame
+                              parent.layer.close(index);
+                          });
+                      }else{
+                          layer.msg("添加失败", {icon: 6},function () {
+                              // 获得frame索引
+                              var index = parent.layer.getFrameIndex(window.name);
+                              //关闭当前frame
+                              parent.layer.close(index);
+                          });
+                      }
+                  }
+              })
+              return false;
+          });
+      });
+  </script>
+  </body>
+</html>

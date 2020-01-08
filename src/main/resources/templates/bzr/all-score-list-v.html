@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>欢迎页面-X-admin2.1</title>
+	<div th:replace="commons::header"></div>
+</head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb x-admin">
+        <a href="">学生成绩</a>
+        <a>
+          <cite>最终评定</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+          <input type="text" name="studentName"  placeholder="姓名" id="studentName" class="layui-input">
+          <div class="layui-input-inline">
+			<select name="contrller" id="face">
+          		<option value="">面试</option>
+          		<option value="PASS">通过</option>
+          		<option value="FAIL">未通过</option>
+          	</select>
+          </div>
+		  <div class="layui-input-inline">
+		  	<select name="contrller" id="write">
+		  		<option value="">笔试</option>
+		  		<option value="PASS">通过</option>
+		  		<option value="FAIL">未通过</option>
+		  	</select>
+		  </div>
+		  <div class="layui-input-inline">
+		  	<select name="contrller" id="project">
+		  		<option value="">项目验收</option>
+		  		<option value="0">通过</option>
+		  		<option value="1">未通过</option>
+		  	</select>
+		  </div>
+		  <div class="layui-input-inline">
+		  	<select name="contrller" id="online">
+		  		<option value="">线上信息</option>
+		  		<option value="0">提交</option>
+		  		<option value="1">未提交</option>
+		  	</select>
+		  </div>
+		  <!--<div class="layui-input-inline">
+		  	<select name="contrller" id="resume">
+		  		<option value="">简历</option>
+		  		<option value="0">合格</option>
+		  		<option value="1">不合格</option>
+		  	</select>
+		  </div>
+		  <div class="layui-input-inline">
+		  	<select name="contrller" id="level">
+		  		<option value="">等级</option>
+		  		<option value="A">A</option>
+		  		<option value="B">B</option>
+		  		<option value="C">C</option>
+		  		<option value="D">D</option>
+		  	</select>-->
+			<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+		  </div>
+
+        </div>
+      </div>
+      <xblock>
+		  <form style="display: inline-block" class="layui-form" enctype="multipart/form-data" th:action="@{/headTeacher/allScore/downLoad}" method="post">
+			  <input type="hidden" name="type" value="AllScoreObject"/>
+			  <input type="hidden" id="cid" name="cid" value=""/>
+			  <input type="hidden" name="excelName" value="AllScoreObject"/>
+			  <input type="hidden" name="excel" value="成绩一览表"/>
+			  <input type="hidden" name="sheet" value="allScoreObjectList"/>
+			  <input class="layui-btn" type="submit"  value="下载(测试成绩+笔面成绩+最终评定)"/>
+		  </form>
+<!--        <span class="x-right" style="line-height:40px">共有数据：88 条</span>-->
+      </xblock>
+      <table class="layui-table" id="allScores-data">
+        <thead>
+          <tr>
+            <th>学员姓名</th>
+			<th>模拟面试结果</th>
+			<th>模拟笔试结果</th>
+			<th>答辩项目名称</th>
+			<th>项目验收是否通过</th>
+			<th>线上信息提交是否完毕</th>
+			<!--<th>简历是否合格</th>
+			<th> 等级</th>-->
+		  </tr>
+        </thead>
+        <tbody>
+          <tr v-for="allScore,status in allScores">
+			<td>{{allScore.sname}}</td>
+            <td>{{allScore.fscore}}</td>
+			<th>{{allScore.wscore}}</th>
+			<th>{{allScore.subjectName}}</th>
+			<th>{{allScore.underCheck==null?"":allScore.underCheck=="FAIL"?"未通过":"通过"}}</th>
+			<th>{{allScore.onlineCheck==null?"":allScore.onlineCheck=="SUBMISSION"?"提交":"未提交"}}</th>
+			<!--<th>{{allScore.piResumeIsok==null?"":allScore.piResumeIsok=="QUALIFIED"?"合格":"不合格"}}</th>
+			<th>{{allScore.piComprehensiveQuality}}</th>-->
+          </tr>
+        </tbody>
+      </table>
+      <div th:replace="bzr/page::footer"></div>
+
+    </div>
+    <script>
+		var vue = new Vue({
+			el: '#allScores-data',
+			data: {
+				allScores: null,
+			}
+		});
+		$.ajax({
+			type : "post",
+			data: {'id':$("#clazzId",parent.document).attr('value')},
+			url : base + '/headTeacher/allScore/list',
+			async: false,
+			success :function (data) {
+				vue.allScores = data.records;
+				vue1.current = data.current;
+				vue1.pages = data.pages;
+			}
+		});
+		$("#cid").val($("#clazzId",parent.document).attr('value'));
+		$("#page-data").on('click','a',function () {
+			$.ajax({
+				type : "post",
+				data: {'id':$("#clazzId",parent.document).attr('value'),'current':this.id,'studentName':$("#studentName").val(),'face':$("#face").val(),'write':$("#write").val(),'project':$("#project").val(),'online':$("#online").val(),'resume':$("#resume").val(),'level':$("#level").val()},
+				url : base + '/headTeacher/allScore/list',
+				async: false,
+				success :function (data) {
+					vue.allScores = data.records;
+					vue1.current = data.current;
+					vue1.pages = data.pages;
+				}
+			});
+		})
+      layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
+
+       /*用户-停用*/
+      function member_stop(obj,id){
+          layer.confirm('确认要停用吗？',function(index){
+
+              if($(obj).attr('title')=='启用'){
+
+                //发异步把用户状态进行更改
+                $(obj).attr('title','停用')
+                $(obj).find('i').html('&#xe62f;');
+
+                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                layer.msg('已停用!',{icon: 5,time:1000});
+
+              }else{
+                $(obj).attr('title','启用')
+                $(obj).find('i').html('&#xe601;');
+
+                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                layer.msg('已启用!',{icon: 5,time:1000});
+              }
+              
+          });
+      }
+
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+	<script>
+		layui.use(['form','layer'], function() {
+			$=layui.jquery;
+			var form = layui.form;
+			layer=layui.layer;
+			//监听提交
+			form.on('submit(sreach)',function (data) {
+				console.log(data)
+				$.ajax({
+					url : base + "/headTeacher/allScore/search",
+					data:{'id':$("#clazzId",parent.document).attr('value'), 'studentName':$("#studentName").val(),'face':$("#face").val(),'write':$("#write").val(),'project':$("#project").val(),'online':$("#online").val(),'resume':$("#resume").val(),'level':$("#level").val()},
+					method: "get",
+					success: function (data) {
+						vue.allScores = data.records;
+						vue1.current = data.current;
+						vue1.pages = data.pages;
+					}
+				})
+			});
+		});
+	</script>
+  </body>
+
+</html>

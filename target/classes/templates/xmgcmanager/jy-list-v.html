@@ -1,0 +1,163 @@
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <!-- <a href="">首页</a> -->
+        <a href="">学生就业</a>
+        <a>
+          <cite>就业详情</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <xblock>
+        <form style="display: inline-block" class="layui-form" enctype="multipart/form-data" th:action="@{/headTeacher/work/downLoad}" method="post">
+          <input type="hidden" name="type" value="StudentEmployment"/>
+          <input type="hidden" id="cid" name="cid" value=""/>
+          <input type="hidden" name="excelName" value="StudentEmployment"/>
+          <input type="hidden" name="excel" value="学生就业详情"/>
+          <input type="hidden" name="sheet" value="studentEmploymentList"/>
+        </form>
+      </xblock>
+      <table class="layui-table x-admin" id="works-data">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>就业情况</th>
+            <th>就业城市</th>
+            <th>就业公司</th>
+            <th>实习薪资</th>
+            <th>福利待遇</th>
+            <th>正式薪资</th>
+            <th>推荐老师</th>
+            <th>职位</th>
+            <th>备注</th>
+			</tr>
+        </thead>
+        <tbody>
+          <tr v-for="work in works">
+            <td>{{work.stuName}}</td>
+            <td>{{work.employee}}</td>
+            <td>{{work.employeecity}}</td>
+            <td>{{work.company}}</td>
+            <td>{{work.internshipsalary}}</td>
+            <td>{{work.welfare}}</td>
+            <td>{{work.officialsalary}}</td>
+            <td>{{work.recommendedteacher}}</td>
+            <td>{{work.position}}</td>
+            <td>{{work.extra}}</td>
+          </tr>
+        </tbody>
+      </table>
+    <script>
+      var vue = new Vue({
+        el: '#works-data',
+        data: {
+          works: null,
+        }
+      });
+
+
+      $.ajax({
+        type : "post",
+        url : base + '/JobAPI/select',
+        async: false,
+        success :function (data) {
+          vue.works = data;
+          vue1.current = data.current;
+          vue1.pages = data.pages;
+        }
+      });
+
+
+      $("#cid").val($("#clazzId",parent.document).attr('value'));
+
+
+
+      $("#page-data").on('click','a',function () {
+        $.ajax({
+          type : "post",
+          data: {'current':this.id},
+          url : base + '/JobAPI/select',
+          async: false,
+          success :function (data) {
+            vue.works = data.records;
+            vue1.current = data.current;
+            vue1.pages = data.pages;
+          }
+        });
+      })
+      layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
+
+
+
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <script>
+      layui.use(['form','layer'], function() {
+        $=layui.jquery;
+        var form = layui.form;
+        layer=layui.layer;
+        //监听提交
+        form.on('submit(sreach)',function (data) {
+          console.log(data)
+          $.ajax({
+            url : base + "/headTeacher/work/search",
+            data:{'id':$("#clazzId",parent.document).attr('value'), 'studentName':$("#studentName").val()},
+            method: "get",
+            success: function (data) {
+              vue.works = data.records;
+              vue1.current = data.current;
+              vue1.pages = data.pages;
+            }
+          })
+        });
+      });
+    </script>
+  </body>
+
+</html>

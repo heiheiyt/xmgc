@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+      <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+  <div class="x-body" id="question">
+      <form class="layui-form">
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+                  <span class="x-red">*</span>学科
+              </label>
+              <div class="layui-input-inline">
+                  <select name="subject" lay-filter="subject" id="subject">
+                      <option disabled="disabled">请选择学科</option>
+                      <option v-for="item in subjectType" v-bind:value="item.id">{{item.typeName}}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+                  <span class="x-red">*</span>班级
+              </label>
+              <div class="layui-input-inline">
+                  <select name="clazz" lay-filter="clazz" id="clazz">
+                      <option th:value="${question.cid}">[[${clazz}]]</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+                  <span class="x-red">*</span>选择问卷
+              </label>
+              <div class="layui-input-inline">
+                  <select name="province" lay-filter="province">
+                      <option disabled="disabled" th:value="${question.sid}">[[${questionName.tName}]]</option>
+                      <option v-for="item in searchPaperType" v-bind:value="item.id">{{item.tname}}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+                  <span class="x-red">*</span>问卷状态
+              </label>
+              <div class="layui-input-inline">
+                  <select name="province" lay-filter="statu">
+                      <option disabled="disabled" th:value="${question.flag}">[[${questionId.name}]]</option>
+                      <option v-for="item in releaseQuestion" v-bind:value="item.id">{{item.name}}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+                  <span class="x-red">*</span>测试时间
+              </label>
+              <div class="layui-input-inline">
+                  <input class="layui-input"  autocomplete="off" placeholder="测试时间" name="start" id="start"
+                         type="date">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="updateQuestionnaires" lay-submit="">
+                  修改
+              </button>
+          </div>
+      </form>
+  </div>
+    <script>
+        var vue = new Vue({
+            el: '#question',
+            data: {
+                pageCurrent:null,
+                subjectType:null,
+                pageTotal:null,
+                searchPaperType:null,
+                releaseQuestion:null
+            }
+        });
+        $.ajax({
+            url: base+"/subject",
+            method: "get",
+            async: false,
+            success: function (data) {
+                vue.subjectType = data;
+            }
+        })
+        $.ajax({
+            url: base+"/releaseQuestion",
+            method: "POST",
+            async: false,
+            success: function (data) {
+                vue.releaseQuestion = data;
+            }
+        })
+        $.ajax({
+            url: base+"/questions",
+            method: "POST",
+            async: false,
+            success: function (data) {
+                vue.searchPaperType = data;
+            }
+        })
+        layui.use('form', function () {
+            var form = layui.form;
+            form.on('select(subject)', function () {
+                var subjectType = $("#subject").val()
+                if (subjectType!="请选择学科") {
+                    $("#clazz").empty().html("<option>请选择班级</option>");
+                    $.ajax({
+                        url: base + "/findClazz/" + subjectType,
+                        method: "Post",
+                        async: false,
+                        success: function (data) {
+                            $.each(data, function (j, obj) {
+                                $("#clazz").append("<option value='" + obj.id + "'>" + obj.cid+ "</option>")
+                            })
+                            form.render();
+                        }
+                    })
+                }else {
+                    alert("请选择学科")
+                }
+            });
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+        
+          //自定义验证规则
+          form.verify({
+            nikename: function(value){
+              if(value.length < 5){
+                return '昵称至少得5个字符啊';
+              }
+            }
+            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,repass: function(value){
+                if($('#L_pass').val()!=$('#L_repass').val()){
+                    return '两次密码不一致';
+                }
+            }
+          });
+
+          //监听提交
+          form.on('submit(updateQuestionnaires)', function(data){
+              layer.msg("正在修改...", function () {
+                  $.post(base+"/updateQuestionnaires", data.field, function (data) {
+                      if (data){
+                          layer.alert("增加成功", {icon: 6},function () {
+                              // 获得frame索引
+                              var index = parent.layer.getFrameIndex(window.name);
+                              //关闭当前frame
+                              parent.layer.close(index);
+                          });
+                      }
+                  });
+              });
+              return false;
+          });
+          
+          
+        });
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+  </body>
+
+</html>

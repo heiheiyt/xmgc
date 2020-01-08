@@ -1,0 +1,183 @@
+<!doctype html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>项目工场</title>
+	<div th:replace="commons::header"></div>
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="#">实训师</a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+        </div>
+        <ul class="layui-nav right" lay-filter="">
+          <li class="layui-nav-item">
+            <a href="javascript:logout()">退出登录</a>
+          </li>
+        </ul>
+		<ul class="layui-nav right" lay-filter="" >
+		  <li class="layui-nav-item">
+		    <a href="javascript:;" onclick="" id="chooseClass">选择班级</a>
+		    <dl class="layui-nav-child" id="clazz-data"> <!-- 二级菜单 -->
+                <dd data-type="alls" v-for="c in clazzs"><a onclick="choose(this)" v-bind:id="c.id">{{c.cid}}</a></dd>
+		    </dl>
+		  </li>
+		</ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+     <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+      <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6fb;</i>
+                    <cite>试卷管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+				<ul class="sub-menu" >
+				    <li>
+				       <a _href="/paper/v/view">
+				             <i class="iconfont">&#xe6a7;</i>
+				             <cite>考试预览</cite>
+				      </a>
+					</li>
+                    <li>
+                        <a _href="/paper/v/exam">
+                             <i class="iconfont">&#xe6a7;</i>
+                             <cite>试卷预览</cite>
+                        </a>
+                    </li >
+				</ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>作业管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/task/v/view">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>作业预览</cite>
+                       </a>
+					</li>
+					<li>
+						<a _href="/task/upload">
+						    <i class="iconfont">&#xe6a7;</i>
+						    <cite>发布作业</cite>		
+						</a>
+                    </li >
+                </ul>
+            </li>
+			<li>
+			    <a href="javascript:;">
+			        <i class="iconfont">&#xe723;</i>
+			        <cite>成绩预览</cite>
+			        <i class="iconfont nav_right">&#xe697;</i>
+			    </a>
+			    <ul class="sub-menu">
+			        <li>
+			            <a _href="/class/v/current">
+			                <i class="iconfont">&#xe6a7;</i>
+			                <cite>当前班级</cite>		
+			            </a>
+					</li>
+					<li>
+					    <a _href="/headTeacher/bm-score-list-w">
+					        <i class="iconfont">&#xe6a7;</i>
+					        <cite>笔试面试</cite>
+					    </a>
+					</li>
+					<li>
+						<a _href="/headTeacher/all-score-list-v">
+						    <i class="iconfont">&#xe6a7;</i>
+						    <cite>最终评定</cite>
+						</a>
+			        </li >
+			    </ul>
+			</li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+          <ul class="layui-tab-title">
+            <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
+          </ul>
+          <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                <dl>
+                    <dd data-type="this">关闭当前</dd>
+                    <dd data-type="other">关闭其它</dd>
+                    <dd data-type="all">关闭全部</dd>
+                </dl>
+          </div>
+          <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe src="/xmgc/trainer/welcome" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+            </div>
+          </div>
+          <div id="tab_show"></div>
+        </div>
+    </div>
+    <script>
+        var vue = new Vue({
+            el:'#clazz-data',
+            data:{
+                clazzs:null
+            }
+        });
+
+        $(function () {
+            showList();
+            function showList() {
+                $.ajax({
+                    url: base + "/clazz/view",
+                    method: "get",
+                    async: true,
+                    success: function (data) {
+                        vue.clazzs = data;
+                    }
+                });
+            }
+        });
+        function choose(obj) {
+            var clazz = {
+                cid:obj.id
+            }
+            go(clazz)
+            function go(clazz) {
+                alert("您已选择"+obj.text+"班级!");
+                $.ajax({
+                    url:base+"/clazz/choose",
+                    data:clazz,
+                    method:"post",
+                    async:true,
+                });
+                $('#chooseClass').html('班级:'+obj.text)
+            }
+        }
+        function logout(){
+            layer.msg('确定要退出吗？', {
+                time: 0 //不自动关闭
+                ,btn: ['YES', 'NO']
+                ,yes: function(index){
+                    layer.close(index);
+                    $.get(base + "/account/logout",function(data){
+                        if(data == 1){
+                            window.location = base + "/login";
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>修改题目内容</title>
+      <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="L_text" class="layui-form-label">
+                    <span class="x-red">*</span>题目内容
+                </label>
+                <div class="layui-input-inline">
+                    <textarea class="text" id="question" name="question" th:utext="${title.question}"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_text" class="layui-form-label">
+                    <span class="x-red">*</span>A
+                </label>
+                <div class="layui-input-inline">
+                  <textarea type="text" id="a" name="a" required="" lay-verify="L_A"
+                            autocomplete="off" class="layui-input" th:utext="${title.selecta}"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_text" class="layui-form-label">
+                    <span class="x-red">*</span>B
+                </label>
+                <div class="layui-input-inline">
+                  <textarea type="text" id="b" name="b" required="" lay-verify="L_B"
+                            autocomplete="off" class="layui-input" th:utext="${title.selectb}"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_text" class="layui-form-label">
+                    <span class="x-red">*</span>C
+                </label>
+                <div class="layui-input-inline">
+		          <textarea type="text" id="c" name="c" required="" lay-verify="L_C"
+                            autocomplete="off" class="layui-input" th:utext="${title.selectc}"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_text" class="layui-form-label">
+                    <span class="x-red">*</span>D
+                </label>
+                <div class="layui-input-inline">
+		          <textarea type="text" id="d" name="d" required="" lay-verify="L_D"
+                            autocomplete="off" class="layui-input" th:utext="${title.selectd}"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_text" class="layui-form-label">
+                    <span class="x-red">*</span>答案
+                </label>
+                <div class="layui-input-inline">
+		          <textarea type="text" id="result" name="result" required="" lay-verify="L_result"
+                            autocomplete="off" class="layui-input" th:utext="${title.answer}"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                </label>
+                <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    确认修改
+                    </button>
+            </div>
+        </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+        //自定义验证规则
+
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(data);
+            $.ajax({
+                url:base+'/task/toEdit',
+                method:'post',
+                data:data.field,
+                success:function (data) {
+                    /* //关闭当前frame
+                     x_admin_close();
+                     // 可以对父窗口进行刷新
+                     x_admin_father_reload();*/
+                    if (data==1){
+                        layer.alert("修改成功", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                        });
+                    }else{
+                        layer.alert("修改失败", {icon: 6},function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                        });
+                    }
+                }
+            })
+          //发异步，把数据提交给php
+          return false;
+        });
+        
+        
+      });
+  </script>
+
+  </body>
+
+</html>

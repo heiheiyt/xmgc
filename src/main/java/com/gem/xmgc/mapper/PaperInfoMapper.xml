@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.PaperInfoMapper">
+    <select id="selectPaperByClassId" resultType="paperinfo">
+        select p.*,t.t_name,s.type_name from paperinfo p  JOIN usepaper u join teacher t join subjecttype s on u.p_id=p.id
+        <where>
+            u.c_id = #{id} and p.statu=0
+            <if test="time!=null and time!=''">
+                and date_format(p.p_time,'%Y-%m-%d') = #{time}
+            </if>
+        </where>
+        group by p.id
+    </select>
+    <select id="selectPaperByTeacherId" resultType="paperinfo">
+        select p.*,t.t_name,s.type_name from paperinfo p join usepaper u on u.p_id=p.id join t_class t1 on t1.c_id = u.c_id join teacher t join subjecttype s
+        <where>
+            t1.t_id = #{id} and p.statu=0
+            <if test="time!=null and time!=''">
+                and date_format(p.p_time,'%Y-%m-%d') = #{time}
+            </if>
+        </where>
+        GROUP BY p.id
+    </select>
+</mapper>

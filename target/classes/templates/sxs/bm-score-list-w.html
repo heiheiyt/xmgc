@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+      <meta charset="UTF-8">
+    <title>面试笔试</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="#">学生成绩</a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">刷新</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+		  <input type="text" id="studentName"  placeholder="姓名" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+      </div>
+      <xblock>
+		  <button class="layui-btn" onclick="">下载</button>
+        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+      </xblock>
+      <table class="layui-table x-admin" id="writtenIntervies-data">
+        <thead>
+          <tr>
+            <th>学员姓名</th>
+			<th>模拟笔试结果</th>
+			<th>模拟面试结果</th>
+		  </tr>
+        </thead>
+        <tbody>
+          <tr class="tb" v-for="writtenIntervie in writtenIntervies" v-bind:id="writtenIntervie.id">
+            <td>{{writtenIntervie.sname}}</td>
+			<td>{{writtenIntervie.wscore}}</td>
+			<td>{{writtenIntervie.fscore}}</td>
+          </tr>
+        </tbody>
+      </table>
+        <div class="page" id="page-data" v-if="page&&page!=1">
+            <a v-if="cur>1" class="paging" href="#" onclick="paging(this)" v-bind:id="1">&lt;&lt;</a>
+            <a v-if="cur>1" class="paging" href="#" onclick="paging(this)" v-bind:id="cur-1">{{cur-1}}</a>
+            <span class="paging">{{cur}}</span>
+            <a v-if="cur<page" class="paging" href="#" onclick="paging(this)" v-bind:id="cur+1">{{cur+1}}</a>
+            <!--  <a href="#" onclick="paging(2)">2</a>-->
+            <a v-if="cur<page" class="paging" href="#" onclick="paging(this)" v-bind:id="page">&gt;&gt;</a>
+        </div>
+    </div>
+    <script>
+      var vue = new Vue({
+        el: '#writtenIntervies-data',
+        data: {
+          writtenIntervies: null,
+        }
+      });
+      var vue1 = new Vue({
+          el:'#page-data',
+          data:{
+              cur:null,
+              page:null,
+          }
+      });
+$(function () {
+    var currents={
+        current:1,
+    };
+    showbm(currents)
+    function showbm(currents){
+        $.ajax({
+            method : "post",
+            url : base + '/headTeacher/writtenIntervie/list',
+            data:currents,
+            success :function (data) {
+                vue.writtenIntervies = data.records;
+                vue1.cur = data.current;
+                vue1.page = data.pages;
+            }
+        });
+    }
+})
+      function paging(obj) {
+          var currents={
+              current:obj.id,
+          };
+          $.ajax({
+              url: base + '/headTeacher/writtenIntervie/list',
+              data: currents,
+              method: "post",
+              async: true,
+              success: function (data) {
+                  vue.papers = data.records;
+                  vue1.cur = data.current;
+                  vue1.page = data.pages;
+              }
+          });
+      }
+      layui.use(['form','layer'], function() {
+        $=layui.jquery;
+        var form = layui.form;
+        layer=layui.layer;
+        //监听提交
+        form.on('submit(sreach)',function (data) {
+          console.log(data)
+          $.ajax({
+            type : "post",
+            url : base + '/headTeacher/writtenIntervie/list',
+            async: false,
+            success :function (data) {
+              vue.writtenIntervies = data.records;
+              vue1.current = data.current;
+              vue1.pages = data.pages;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

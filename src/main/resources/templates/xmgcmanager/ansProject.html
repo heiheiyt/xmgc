@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+
+
+
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+          <div class="layui-input-inline">
+            <div class="layui-input-inline" id="Ayear">
+              <select class="layui-select" id="years" lay-filter="year">
+                <option disabled selected>请选择年份</option>
+                <option v-for="y in years">{{y.startYear}}</option>
+              </select>
+            </div>
+
+            <div class="layui-input-inline" id="subjecttype">
+              <select class="layui-select" id="subtype" lay-filter="subtype" >
+              </select>
+            </div>
+
+            <div class="layui-input-inline">
+              <select id="itemClazz" name="itemCate" class="valid" lay-filter="clazzes" >
+
+              </select>
+            </div>
+            <!--<div class="layui-input-inline">
+              <a class="layui-btn layui-btn-small"  href="javascript:Download();" title="下载">
+                下载excel</a>
+            </div>-->
+          </div>
+        </form>
+        <form style="display: inline-block" class="layui-form" enctype="multipart/form-data"  th:action="@{/xmgclist/downLoad}" method="get">
+          <input id="clazz" type="hidden" name="clazz"/>
+          <input class="layui-btn" type="submit"  value="下载Excel"/>
+        </form>
+
+      </div>
+      
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>学生姓名</th>
+            <th>答辩项目</th>
+            <th>笔试成绩</th>
+            <th>面试成绩</th>
+            <th>在线资料是否提交完毕</th>
+            <th>线下验收是否通过</th>
+            <th>最后修改时间</th>
+            <th>备注</th>
+            <th>操作</th>
+           </tr>
+        </thead>
+        <tbody id="students">
+          <tr v-for="stu in student">
+            <td>{{stu.sname}}</td>
+            <td>{{stu.subjectName}}</td>
+            <td>{{stu.wscore}}</td>
+            <td>{{stu.fscore}}</td>
+            <td>{{stu.onlineCheck==null?"":stu.onlineCheck=="SUBMISSION"?"提交":"未提交"}}</td>
+            <td>{{stu.underCheck==null?"":stu.underCheck=="FAIL"?"未通过":"通过"}}</td>
+            <td>{{stu.lastchangeTime}}</td>
+            <td>{{stu.statu=="0"?"在班":"未在班"}}</td>
+            <td>
+            	<a title="查看" v-bind:id="stu.id" onclick="x_admin_show('编辑','/xmgclist/ansProjectChange/'+id)" href="javascript:;">
+                <i class="layui-icon">&#xe63c;</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page" id="page-data" >
+        <div>
+          <a class="page" href="#" onclick="page(id)" id="1">&lt;&lt;</a>
+          <a v-if="cur>1" class="page" href="#" onclick="page(id)" v-bind:id="cur-1">{{cur-1}}</a>
+          <span class="page">{{cur}}</span>
+          <a v-if="cur<page" class="page" href="#" onclick="page(id)" v-bind:id="cur+1">{{cur+1}}</a>
+          <a class="page" href="#" onclick="page(id)" v-bind:id="page">&gt;&gt;</a>
+        </div>
+      </div>
+
+    </div>
+    <script>
+      var Allyear = new Vue({
+        el: '#Ayear',
+        data: {
+          years:"",
+        }
+      });
+
+      var AllStudents = new Vue({
+        el:'#students',
+        data:{
+          student:"",
+        }
+      })
+
+      var pages = new Vue({
+        el:'#page-data',
+        data:{
+          cur:"",
+          page:"",
+        }
+      })
+      var currents = {
+        year: $("#years").val(),
+        subject:$("#subtype").val(),
+        clazz:$("#itemClazz").val(),
+        current:"1",
+      }
+
+      $(function () {
+        $.ajax({
+          url:base+"/xmgclist/AllYear",
+          method:"get",
+          async:false,
+          success:function (data) {
+            Allyear.years=data;
+            form.render();
+          }
+        })
+      })
+
+      layui.use(['laydate','form','layer'], function(){
+        $=layui.jquery;
+        var form = layui.form;
+        //var laydate = layui.laydate;
+        layer=layui.layer;
+        form.on('select(year)', function(){
+          currents.year=$("#years").val();
+          $.ajax({
+            url: base+"/xmgclist/AllSubject",
+            method: "get",
+            data: currents,
+            async: true,
+            success: function(data){
+              $("#subtype").empty().html("<option disabled selected>请选择学科方向</option>");
+              $.each(data,function(j,obj){
+                $("#subtype").append("<option value='"+obj.id+"'>"+obj.typeName+"</option>")
+              })
+              form.render();
+            }
+          });
+        });
+
+        form.on('select(subtype)',function(){
+          currents.year=$("#years").val();
+          currents.subject=$("#subtype").val();
+          $.ajax({
+            url: base+"/xmgclist/AllClazz",
+            method: "get",
+            data: currents,
+            async: true,
+            success: function(data){
+              $("#itemClazz").empty().html("<option disabled selected>请选择班级</option>");
+              $.each(data,function(j,obj){
+                $("#itemClazz").append("<option value='"+obj.id+"'>"+obj.cid+"</option>")
+              })
+              form.render();
+            }
+          });
+        });
+
+        form.on('select(clazzes)', function(){
+          currents.year=$("#years").val();
+          currents.subject=$("#subtype").val();
+          currents.clazz=$("#itemClazz").val();
+          $.ajax({
+            url : base + "/xmgclist/AllAnsProject/one",
+            method: "post",
+            data: currents,
+            async: true,
+            success: function (data) {
+              AllStudents.student=data.records;
+              pages.cur=data.current;
+              pages.page=data.pages;
+
+            }
+          });
+          $("#clazz").val(currents.clazz);
+        });
+      });
+
+      function page(obj) {
+        currents.current=obj;
+        currents.clazz=$("#itemClazz").val();
+        $.ajax({
+          url: base + "/xmgclist/AllAnsProject/one",
+          data: currents,
+          method: "post",
+          async: true,
+          success: function (data) {
+            AllStudents.student = data.records;
+            pages.cur=data.current;
+            pages.page=data.pages;
+          }
+        });
+      }
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+    </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <title>欢迎页面-X-admin2.1</title>
+	  <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <form class="layui-form" id="detail-data">
+			<input type="hidden" name="id" v-bind:value="detail.id">
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>学生姓名
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="cname" class="layui-input" v-bind:value="detail.cname">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+				<label for="L_username" class="layui-form-label">
+					<span class="x-red">*</span>班级编号
+				</label>
+				<div class="layui-input-inline">
+					<input type="text" name="cid" class="layui-input" v-bind:value="detail.cid">
+				</div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>性别
+			    </label>
+			    <div class="layui-input-inline">
+					<input type="radio" class="layui-input" name="sex" value="MALE" v-model="radio">男
+					<input type="radio" class="layui-input" name="sex" value="FEMALE" v-model="radio">女
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>学校名称
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="sname" class="layui-input" v-bind:value="detail.sname">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>专业
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="major" class="layui-input" v-bind:value="detail.major">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>外语水平
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="language" class="layui-input" v-bind:value="detail.language">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>身份证号
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="idCard" class="layui-input" v-bind:value="detail.idCard">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>移动电话
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="telephone" class="layui-input" v-bind:value="detail.telephone">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>QQ号码
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="qq" class="layui-input" v-bind:value="detail.qq">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>培训类型
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="ttype" class="layui-input" v-bind:value="detail.ttype">
+			    </div>
+			</div><div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>证书
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="certificate" class="layui-input" v-bind:value="detail.certificate">
+			    </div>
+			</div>
+
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>籍贯
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="snative" class="layui-input" v-bind:value="detail.snative">
+			    </div>
+			</div>
+
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>学校类型
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="stype" class="layui-input" v-bind:value="detail.stype">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>学历
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="education" class="layui-input" v-bind:value="detail.education">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>毕业时间
+			    </label>
+			    <div class="layui-input-inline">
+					<input type="date" id="endTime" name="graTime" placeholder="时间" required="" lay-verify="required"
+						   autocomplete="off" class="layui-input" v-bind:value="detail.graTime">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>家长姓名
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="pname" class="layui-input" v-bind:value="detail.pname">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+				<label for="L_username" class="layui-form-label">
+				<span class="x-red">*</span>家庭电话
+				</label>
+				<div class="layui-input-inline">
+					<input type="text" name="ftel" class="layui-input" v-bind:value="detail.ftel">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>家庭现住址
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="address" class="layui-input" v-bind:value="detail.address">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red">*</span>紧急联系人电话
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="ptel" class="layui-input" v-bind:value="detail.ptel">
+			    </div>
+			</div>
+          	<div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red"></span>邮箱
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" name="email" class="layui-input" v-bind:value="detail.email">
+              </div>
+         	</div>
+			<div class="layui-form-item">
+				<label for="L_email" class="layui-form-label">
+				<span class="x-red"></span>年份
+				</label>
+				<div class="layui-input-inline">
+					<input type="text" name="year" class="layui-input" v-bind:value="detail.year">
+				</div>
+			</div>
+
+
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>就业类型
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="wtype" class="layui-input" v-bind:value="detail.wtype">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>就业状态
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="wstatus" class="layui-input" v-bind:value="detail.wstatus">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>质量执行
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="quaexecution" class="layui-input" v-bind:value="detail.quaexecution">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>就业老师
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="recteacher" class="layui-input" v-bind:value="detail.recteacher">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>实训师
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="trainer" class="layui-input" v-bind:value="detail.trainer">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>信息创建人
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="createper" class="layui-input" v-bind:value="detail.createper">
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>地域
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="area" class="layui-input" v-bind:value="detail.area">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>学生状态
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="stustatus" class="layui-input" v-bind:value="detail.stustatus">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_email" class="layui-form-label">
+							<span class="x-red"></span>备注
+						</label>
+						<div class="layui-input-inline">
+							<input type="text" name="remarks" class="layui-input" v-bind:value="detail.remarks">
+						</div>
+					</div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  修改
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+		var vue = new Vue({
+			el: '#detail-data',
+			data: {
+				detail: null,
+				radio: null
+			}
+		});
+		//获取url上的参数
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == variable){return pair[1];}
+			}
+			return(false);
+		}
+		$.ajax({
+			type: 'post',
+			url: base + '/headTeacher/studentDetail/find?id='+getQueryVariable("id"),
+			success :function (data) {
+				vue.detail = data;
+				vue.radio = data.sex;
+			}
+			});
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+        //自定义验证规则
+        form.verify({
+          nikename: function(value){
+            if(value.length < 5){
+              return '昵称至少得5个字符啊';
+            }
+          }
+          ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+          ,repass: function(value){
+              if($('#L_pass').val()!=$('#L_repass').val()){
+                  return '两次密码不一致';
+              }
+          }
+        });
+
+        //监听提交
+        form.on('submit(add)', function(data){
+			$.ajax({
+				type: 'post',
+				data: data.field,
+				url: base + '/headTeacher/studentDetail/edit'
+			});
+          console.log(data);
+          //发异步，把数据提交给php
+          layer.alert("修改成功", {icon: 6},function () {
+              // 获得frame索引
+              var index = parent.layer.getFrameIndex(window.name);
+              //关闭当前frame
+              parent.layer.close(index);
+          });
+          return false;
+        });
+
+
+      });
+		layui.use('laydate', function(){
+			var laydate = layui.laydate;
+
+			//执行一个laydate实例
+			laydate.render({
+				elem: '#time' //指定元素
+			});
+
+
+		});
+  </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+  </body>
+
+</html>

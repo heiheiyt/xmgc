@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+        	 <div class="layui-input-inline">
+                    <select id="itemCate" name="itemCate" class="valid" lay-filter="demo">
+                       <option name="1" th:value="supermanager">超级管理员</option>
+                       <option name="1" th:value="worker">教务</option>
+                       <option name="2" th:value="relteacher">实训师</option>
+                       <option name="3" th:value="manage">班主任</option>
+                       <option name="1" th:value="xmgcmanager">项目工厂管理员</option>
+                    </select>
+                </div>
+          <input class="layui-input" placeholder="姓名" th:id="name" th:name="name" >
+          <button class="layui-btn"  lay-submit lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+      </div>
+      
+      <table class="layui-table" id="table">
+        <thead>
+          <tr>
+
+            <th>姓名</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>邮箱</th>
+            <th>状态</th>
+          	<th>操作</th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items">
+
+            <td v-if="select=='worker'||select=='supermanager'||select=='xmgcmanager'">{{item.mName}}</td>
+            <td v-if="select=='relteacher'">{{item.tname}}</td>
+            <td v-if="select=='manage'">{{item.mname}}</td>
+
+            <td v-if="select=='worker'||select=='supermanager'||select=='xmgcmanager'">{{item.mNo}}</td>
+            <td v-if="select=='relteacher'">{{item.tid}}</td>
+            <td v-if="select=='manage'">{{item.mid}}</td>
+
+            <td v-if="select=='worker'||select=='supermanager'||select=='xmgcmanager'">{{item.mPassword}}</td>
+            <td v-if="select=='relteacher'">{{item.tpassword}}</td>
+            <td v-if="select=='manage'">{{item.mpassword}}</td>
+
+            <td v-if="select=='worker'||select=='supermanager'||select=='xmgcmanager'">{{item.mEmail}}</td>
+            <td v-if="select=='relteacher'">{{item.email}}</td>
+            <td v-if="select=='manage'">{{item.email}}</td>
+
+            <td v-if="select=='worker'||select=='supermanager'||select=='xmgcmanager'">{{item.mStatus=="0"?"正常使用":"未使用"}}</td>
+            <td v-if="select=='relteacher'">{{item.statu=="0"?"正常使用":"未使用"}}</td>
+            <td v-if="select=='manage'">{{item.statu=="0"?"正常使用":"未使用"}}</td>
+
+            <td class="td-manage">
+              <a title="查看"  v-bind:id="item.id" onclick="x_admin_show('编辑','/list/allShow/'+id+'/'+currents.person)" href="#">
+                <i class="layui-icon">&#xe63c;</i>
+              </a>
+              <a title="删除" v-bind:id="item.id" onclick="member_del(id)" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+              </a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <div class="page" id="page-data">
+        <div>
+          <a class="page" href="#" onclick="page(id)" id="1">&lt;&lt;</a>
+          <a v-if="cur>1" class="page" href="#" onclick="page(id)" v-bind:id="cur-1">{{cur-1}}</a>
+          <span class="page">{{cur}}</span>
+          <a v-if="cur<page" class="page" href="#" onclick="page(id)" v-bind:id="cur+1">{{cur+1}}</a>
+          <a class="page" href="#" onclick="page(id)" v-bind:id="page">&gt;&gt;</a>
+        </div>
+      </div>
+
+    </div>
+    <script>
+      var vue = new Vue({
+        el:'#table',
+        data:{
+          items:"",
+          select:null
+        }
+      })
+      var vue1 = new Vue({
+        el:'#page-data',
+        data:{
+          cur:"",
+          page:"",
+        }
+      })
+      var currents ={
+        current:"1",
+        person:$("#itemCate").val(),
+        name:$("#name").val(),
+      }
+      $(function(){
+        showData(currents);
+        function showData(currents){
+          $.ajax({
+            url : base + "/list/allShow/one",
+            method: "get",
+            data: currents,
+            async: true,
+            success: function (data) {
+              vue.items = data.records;
+              vue1.cur=data.current;
+              vue1.page=data.pages;
+              vue.select=$("#itemCate").val();
+            }
+          });
+        }
+      })
+
+      function page(obj) {
+        currents.current=obj;
+        currents.person=$("#itemCate").val();
+        currents.name=$("#name").val();
+        $.ajax({
+          url: base + "/list/allShow/one",
+          data: currents,
+          method: "get",
+          async: true,
+          success: function (data) {
+            vue.items = data.records;
+            vue1.cur = data.current;
+            vue1.page = data.pages;
+          }
+        });
+      }
+
+      layui.use(['laydate','form','layer'], function(){
+        $=layui.jquery;
+        var form = layui.form;
+        var laydate = layui.laydate;
+        layer=layui.layer;
+        form.on('select(demo)', function(){
+          currents.person=$("#itemCate").val();
+          currents.name=$("#name").val();
+          $.ajax({
+            url : base + "/list/allShow/one",
+            method: "get",
+            data: currents,
+            async: true,
+            success: function (data) {
+              vue.items = data.records;
+              vue1.cur=data.current;
+              vue1.page=data.pages;
+              vue.select=$("#itemCate").val();
+            }
+          });
+        });
+        form.on('submit(sreach)', function(){
+          currents.person=$("#itemCate").val();
+          currents.name=$("#name").val();
+          $.ajax({
+            url : base + "/list/allShow/one",
+            method: "get",
+            data: currents,
+            async: true,
+            success: function (data) {
+              vue.items = data.records;
+              vue1.cur=data.current;
+              vue1.page=data.pages;
+            }
+          });
+        });
+       /* var table = layui.table({
+
+        })*/
+
+
+        layer=layui.layer;
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
+
+
+
+      /*用户-删除*/
+      function member_del(id){
+        currents.person=$("#itemCate").val();
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+            if(index){
+              $.ajax({
+                url:base+"/list/allShowdelOne/"+id,
+                data:currents,
+                method:"post",
+                async:true,
+                success: function(data){
+                  location.reload();
+                  if(data==1){
+                    layer.msg('已删除!',{icon:1,time:1000});
+
+                  }
+                }
+
+              })
+            }
+          });
+      }
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
+  </body>
+
+</html>

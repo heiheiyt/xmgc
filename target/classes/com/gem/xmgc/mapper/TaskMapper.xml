@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.TaskMapper">
+    <select id="selectTaskByOther" resultType="task">
+        select t1.*,t2.t_name from task t1  JOIN teacher t2
+        <where>
+            t1.statu=0
+            <if test="id!=null and id!=''">
+                and t1.c_id = #{id}
+            </if>
+            <if test="time!=null and time!=''">
+                and #{time} between date_format(t1.t_set_time,'%Y-%m-%d') and date_format(t1.t_stop_time,'%Y-%m-%d')
+            </if>
+            <if test="name!=null and name!=''">
+                and t1.task_name=#{name}
+            </if>
+        </where>
+        GROUP BY t1.id
+    </select>
+    <select id="selectTaskByClassId" resultType="task">
+        select t1.*,t2.t_name from task t1  JOIN teacher t2
+        <where>
+            t1.statu=0 and t1.c_id = #{id}
+            <if test="time!=null and time!=''">
+                and #{time} between date_format(t1.t_set_time,'%Y-%m-%d') and date_format(t1.t_stop_time,'%Y-%m-%d')
+            </if>
+            <if test="name!=null and name!=''">
+                and t1.task_name=#{name}
+            </if>
+        </where>
+        GROUP BY t1.id
+    </select>
+    <select id="selectTaskByTeacherId" resultType="task">
+        select t1.*,t2.t_name from task t1 JOIN class c on t1.c_id=c.id JOIN teacher t2
+        <where>
+            t1.t_id =#{id} and t1.statu=0 and c.statu=0
+            <if test="time!=null and time!=''">
+                and #{time} between date_format(t1.t_set_time,'%Y-%m-%d') and date_format(t1.t_stop_time,'%Y-%m-%d')
+            </if>
+            <if test="name!=null and name!=''">
+                and t1.task_name=#{name}
+            </if>
+            GROUP BY t1.id
+        </where>
+    </select>
+    <select id="selectTaskTimeById" resultType="string">
+        select date_format(t_stop_time,'%Y-%m-%d') from task where id=#{id}
+    </select>
+
+    <update id="updateTimeById" >
+        update task set t_stop_time=concat(#{ymd},#{endTime}) where id =#{id}
+    </update>
+</mapper>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+</head>
+<body>
+<center style="font-weight: bold;font-size: 40px;color: lightskyblue; height: 30px;line-height: 30px;padding-top: 50px">
+    <a class="x-a" target="_blank">欢迎登录gem项目工场考试系统</a>
+    <br>
+</center>
+
+<fieldset class="layui-elem-field">
+    <legend>系统通知</legend>
+    <div class="layui-field-box">
+        <table class="layui-table" lay-skin="line">
+            <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <a class="x-a" href="http://x.xuebingsi.com/" target="_blank"><img
+                                th:src="@{/static/images/x-admin.png}" height="40px" width="80px"/></a>
+                        <br>
+                        感谢X-admin提供的免费模板
+                    </div>
+                </td>
+            </tr>
+            <hr>
+            <tr>
+                <td>
+                    <div>
+                        <a class="x-a" href="http://www.baidu.com" target="_blank"><img
+                                th:src="@{/static/images/百度.png}" height="40px" width="80px"/></a>
+                        <br>
+                        更多请搜索
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <legend>开发者信息</legend>
+    <div class="layui-field-box">
+        <table class="layui-table" lay-skin="line">
+            <tbody>
+            <tr>
+                <th>
+                    开发人
+                </th>
+                <td>
+                    杨涛
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    联系方式
+                </th>
+                <td>
+                    2315842768@qq.com
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+</body>
+</html>

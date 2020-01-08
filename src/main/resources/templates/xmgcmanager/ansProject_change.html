@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  <body>
+    <div class="x-body">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="subjectCheckId" class="layui-form-label">
+                    <span class="x-red">*</span>项目id
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="subjectCheckId" name="subjectCheckId" required="" lay-verify="required"
+                           autocomplete="off" disabled="disabled" class="layui-input" th:value="${subjectCheck.id}">
+                </div>
+            </div>
+        	<div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>项目名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="subjectName" name="subjectName" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" th:value="${subjectCheck.subjectName}">
+              </div>
+          </div>
+        	<div class="layui-form-item">
+        		<label for="onlineCheck" class="layui-form-label">
+                  <span class="x-red">*</span>在线资料是否提交完毕
+              </label>
+          			<div class="layui-input-inline">
+                    <select id="onlineCheck" name="onlineCheck" class="valid">
+                        <option disabled selected>[[${subjectCheck.onlineCheck}]]</option>
+                       <option value="未提交">未提交</option>
+                       <option value="提交">已提交</option>
+                       
+                    </select>
+                </div>
+           </div>
+           <div class="layui-form-item">
+        		<label for="underCheck" class="layui-form-label">
+                  <span class="x-red">*</span>线下验收是否通过
+              </label>
+          			<div class="layui-input-inline">
+                    <select id="underCheck" name="underCheck" class="valid">
+                        <option disabled selected>[[${subjectCheck.underCheck}]]</option>
+                       <option value="未通过">未通过</option>
+                       <option value="通过">已通过</option>
+                    </select>
+                </div>
+           </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit>
+                  修改
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+        
+
+          //监听提交
+          form.on('submit(add)', function(data){
+            console.log(data);
+            //发异步，把数据提交给php
+              $.post(base+"/xmgclist/ansProjectChange",data.field,function (data1) {
+
+                  if(data1==1){
+                      layer.alert("修改成功", {icon: 6},function () {
+                          // 获得frame索引
+                          var index = parent.layer.getFrameIndex(window.name);
+                          //关闭当前frame
+                          x_admin_father_reload();
+                          parent.layer.close(index);
+                          //location.reload(location.href);
+                      });
+                  }else{
+                      layer.alert("修改失败", {icon: 6},function () {
+                          // 获得frame索引
+                          var index = parent.layer.getFrameIndex(window.name);
+                          //关闭当前frame
+                          parent.layer.close(index);
+                      });
+                  }
+              })
+
+            return false;
+          });
+          
+          
+        });
+    </script>
+  </body>
+
+</html>

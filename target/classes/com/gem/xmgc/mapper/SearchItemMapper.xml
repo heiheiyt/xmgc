@@ -1,0 +1,12 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.SearchItemMapper">
+    <select id="selectQuestionByPageName" parameterType="String" resultType="searchitem">
+        select item.* from searchitem item join searchpaperdetail detail on detail.q_id=item.id join searchpapertype type on type.id=detail.paper_id
+        <where>
+            type.t_name=#{name}
+        </where>
+        and item.statu=0
+    </select>
+</mapper>

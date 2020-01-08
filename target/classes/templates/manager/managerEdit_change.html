@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <form class="layui-form">
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>经理ID
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="emailccId" name="emailccId" th:value="${emailcc.id}" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" disabled="disabled">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>新经理姓名	
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="username" name="username" th:value="${emailcc.username}" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+         <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>新邮箱
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="email" name="email" th:value="${emailcc.email}" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit type="submit">
+                  修改
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+
+          //监听提交
+          form.on('submit(add)', function(data){
+            console.log(data);
+            //发异步，把数据提交给php
+              $.get(base+"/list/managerChange",data.field,function (data1) {
+                  x_admin_father_reload();
+                  if(data1==1){
+                      layer.alert("修改成功", {icon: 6},function () {
+                          // 获得frame索引
+                          var index = parent.layer.getFrameIndex(window.name);
+                          //关闭当前frame
+                          parent.layer.close(index);
+                      });
+                  }
+              })
+            return false;
+          });
+
+        });
+    </script>
+  </body>
+
+</html>

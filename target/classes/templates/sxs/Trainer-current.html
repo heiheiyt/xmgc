@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>当前班级成绩</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body class="">
+    <div class="x-nav">
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">刷新</i></a>
+    </div>
+    <div class="x-body" >
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+          <input type="text" name="name"  placeholder="请输入姓名" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
+      <table class="layui-table x-admin"  id="student-data">
+        <thead>
+        <tr>
+          <th>编号</th>
+          <th>学员姓名</th>
+          <th>成绩</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr v-for="student in students">
+          <td>{{student.id}}</td>
+          <td>{{student.sname}}</td>
+          <td class="td-manage">
+            <button class="layui-btn" v-bind:id="student.id" onclick="x_admin_show('学生成绩详情','/score/student/'+id)"><i class="layui-icon"></i>详情</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="page" id="page-data" v-if="page&&page!=1" >
+        <a v-if="cur>1" class="paging" href="#" onclick="paging(this)" v-bind:id="1">&lt;&lt;</a>
+        <a v-if="cur>1" class="paging" href="#" onclick="paging(this)" v-bind:id="cur-1">{{cur-1}}</a>
+        <span class="paging">{{cur}}</span>
+        <a v-if="cur<page" class="paging" href="#" onclick="paging(this)" v-bind:id="cur+1">{{cur+1}}</a>
+        <!--  <a href="#" onclick="paging(2)">2</a>-->
+        <a v-if="cur<page" class="paging" href="#" onclick="paging(this)" v-bind:id="page">&gt;&gt;</a>
+      </div>
+    </div>
+
+   
+    <script>
+      var vue = new Vue({
+        el:"#student-data",
+        data:{
+          students:null,
+        }
+      });
+      var vue1 = new Vue({
+        el:"#page-data",
+        data:{
+          cur:null,
+          page:null
+        }
+      })
+      $(function () {
+        var currents={
+          current:1,
+        };
+        showStudent(currents)
+        function showStudent(currents){
+          $.ajax({
+            url:base+'/score/current',
+            data:currents,
+            method:'get',
+            success:function (data) {
+              vue.students=data.records;
+              vue1.cur=data.current;
+              vue1.page=data.pages
+            }
+          })
+        }
+
+      })
+      function paging(obj) {
+        var currents={
+          current:obj.id,
+        };
+        $.ajax({
+          url: base + "/score/current",
+          data: currents,
+          method: "get",
+          async: true,
+          success: function (data) {
+            vue.students = data.records;
+            vue1.cur = data.current;
+            vue1.page = data.pages;
+          }
+        });
+      }
+    </script>
+  </body>
+  </html>

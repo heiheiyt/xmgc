@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  
+  <head>
+    <title>欢迎页面-X-admin2.1</title>
+      <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <form class="layui-form" id="accountNumber-data">
+			<input type="hidden" name="id" v-bind:value="accountNumber.id">
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red"></span>账号
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text"  name="sid" class="layui-input" v-bind:value="accountNumber.sid">
+			    </div>
+			</div>
+			<div class="layui-form-item">
+			    <label for="L_username" class="layui-form-label">
+			        <span class="x-red"></span>名字
+			    </label>
+			    <div class="layui-input-inline">
+			        <input type="text" name="sname" class="layui-input"  v-bind:value="accountNumber.sname">
+			    </div>
+			</div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  修改
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+		var vue = new Vue({
+			el: '#accountNumber-data',
+			data: {
+				accountNumber: null,
+			}
+		});
+		//获取url上的参数
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == variable){return pair[1];}
+			}
+			return(false);
+		}
+		$.ajax({
+			type: 'post',
+			url: base + '/headTeacher/student/find?id='+getQueryVariable("id"),
+			success :function (data) {
+				vue.accountNumber = data;
+			}
+		});
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+        //自定义验证规则
+        form.verify({
+          nikename: function(value){
+            if(value.length < 5){
+              return '昵称至少得5个字符啊';
+            }
+          }
+          ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+          ,repass: function(value){
+              if($('#L_pass').val()!=$('#L_repass').val()){
+                  return '两次密码不一致';
+              }
+          }
+        });
+
+        //监听提交
+        form.on('submit(add)', function(data){
+			$.ajax({
+				type: 'post',
+				data: data.field,
+				url: base + '/headTeacher/student/edit'
+			});
+          console.log(data);
+          //发异步，把数据提交给php
+          layer.alert("增加成功", {icon: 6},function () {
+              // 获得frame索引
+              var index = parent.layer.getFrameIndex(window.name);
+              //关闭当前frame
+              parent.layer.close(index);
+          });
+          return false;
+        });
+        
+        
+      });
+  </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+  </body>
+
+</html>

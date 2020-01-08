@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.SubjectContentMapper">
+    <select id="selectSubjectPlan" resultType="subjectcontent">
+        select s.*,t.name,s2.s_name from subjectcontent s join testtype t on s.type=t.id
+        join secondlevel s2 join subjectcontentdetail su on su.content=s2.id
+         where s.statu=0
+    </select>
+    <select id="selectSubjectPlanBysubjectId" resultType="subjectcontent">
+        select s.*,t.name,s2.s_name from subjectcontent s join testtype t on s.type=t.id
+        join secondlevel s2 join subjectcontentdetail su on su.content=s2.id
+        where s.subjectid=#{subjectid} and s.statu=0
+
+    </select>
+</mapper>

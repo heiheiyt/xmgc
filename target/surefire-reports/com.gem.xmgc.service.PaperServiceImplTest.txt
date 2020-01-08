@@ -1,0 +1,76 @@
+-------------------------------------------------------------------------------
+Test set: com.gem.xmgc.service.PaperServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.45 s <<< FAILURE! - in com.gem.xmgc.service.PaperServiceImplTest
+findPaperByClassIdTest(com.gem.xmgc.service.PaperServiceImplTest)  Time elapsed: 0.049 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: 
+nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 GROUP BY u.id ) TOTAL 
+
+### The error may exist in file [C:\Users\90479\Desktop\xmgc1\xmgc\target\classes\com\gem\xmgc\mapper\UsePaperMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 GROUP BY u.id ) TOTAL 
+
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByClassIdTest(PaperServiceImplTest.java:28)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+
+### Error querying database.  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 GROUP BY u.id ) TOTAL 
+
+### The error may exist in file [C:\Users\90479\Desktop\xmgc1\xmgc\target\classes\com\gem\xmgc\mapper\UsePaperMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 GROUP BY u.id ) TOTAL 
+
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByClassIdTest(PaperServiceImplTest.java:28)
+Caused by: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: 
+Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 GROUP BY u.id ) TOTAL 
+
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByClassIdTest(PaperServiceImplTest.java:28)
+Caused by: java.sql.SQLSyntaxErrorException: Expression #9 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.p.p_name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByClassIdTest(PaperServiceImplTest.java:28)
+
+findPaperByDateAndName(com.gem.xmgc.service.PaperServiceImplTest)  Time elapsed: 0.033 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: 
+nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 AND u.c_id = ? AND date_format(u.start_time, '%Y-%m-%d') = ? GROUP BY u.id ) TOTAL 
+
+### The error may exist in file [C:\Users\90479\Desktop\xmgc1\xmgc\target\classes\com\gem\xmgc\mapper\UsePaperMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 AND u.c_id = ? AND date_format(u.start_time, '%Y-%m-%d') = ? GROUP BY u.id ) TOTAL 
+
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByDateAndName(PaperServiceImplTest.java:34)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+
+### Error querying database.  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 AND u.c_id = ? AND date_format(u.start_time, '%Y-%m-%d') = ? GROUP BY u.id ) TOTAL 
+
+### The error may exist in file [C:\Users\90479\Desktop\xmgc1\xmgc\target\classes\com\gem\xmgc\mapper\UsePaperMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 AND u.c_id = ? AND date_format(u.start_time, '%Y-%m-%d') = ? GROUP BY u.id ) TOTAL 
+
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByDateAndName(PaperServiceImplTest.java:34)
+Caused by: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: 
+Error: Method queryTotal execution error of sql : 
+ SELECT COUNT(1) FROM ( SELECT u.*, p.p_name FROM usepaper u JOIN paperinfo p JOIN class c WHERE u.statu = 0 AND u.c_id = ? AND date_format(u.start_time, '%Y-%m-%d') = ? GROUP BY u.id ) TOTAL 
+
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByDateAndName(PaperServiceImplTest.java:34)
+Caused by: java.sql.SQLSyntaxErrorException: Expression #9 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.p.p_name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+	at com.gem.xmgc.service.PaperServiceImplTest.findPaperByDateAndName(PaperServiceImplTest.java:34)
+
+findAllPaperinfoByClassId(com.gem.xmgc.service.PaperServiceImplTest)  Time elapsed: 0.006 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter 'time' not found. Available parameters are [page, id, param1, param2]
+	at com.gem.xmgc.service.PaperServiceImplTest.findAllPaperinfoByClassId(PaperServiceImplTest.java:65)
+Caused by: org.apache.ibatis.binding.BindingException: Parameter 'time' not found. Available parameters are [page, id, param1, param2]
+	at com.gem.xmgc.service.PaperServiceImplTest.findAllPaperinfoByClassId(PaperServiceImplTest.java:65)
+

@@ -1,0 +1,8 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.StudentMapper">
+    <select id="selectAllStudentByTid" resultType="student">
+        select * from student s where s.c_id in(select c_id from t_class where t_id=#{id}) and s.statu=0
+    </select>
+</mapper>

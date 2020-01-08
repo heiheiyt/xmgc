@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fc21022b-0dea-4362-9849-bdb5408bae41" name="Default Changelist" comment="xmgc" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="xmgc" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-welcome.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" column="44" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/commons.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="JUnit4 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>scoreVi</find>
+      <find>selectcl</find>
+      <find>clazzon</find>
+      <find>c_id</find>
+      <find>rep</find>
+      <find>checkb</find>
+      <find>subject</find>
+      <find>/subject</find>
+      <find>getQueryVariable</find>
+      <find>vue1</find>
+      <find>findClazzByClazzPage</find>
+      <find>headTeacher</find>
+      <find>base</find>
+      <find>all</find>
+      <find>wenjuan</find>
+      <find>selectClazz</find>
+      <find>alert</find>
+      <find>毕业</find>
+      <find>年份</find>
+      <find>录入</find>
+      <find>search</find>
+      <find>sera</find>
+      <find>studentName</find>
+      <find>修改</find>
+      <find>添加</find>
+      <find>score</find>
+      <find>/select</find>
+      <find>/JobAPI</find>
+      <find>for</find>
+      <find>j</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/da-add.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/zh-add.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/zh-list-v.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/JwController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-taskdetail.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-titledetail.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-taskedit.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-taskview.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/bm-score-list-w.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/all-score-list-v.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/bm-score-list-w.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/all-score-list-v.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/jw/SubjectTestPlan.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/jw/SecondModualAdd.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/bzr-index.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/jw/registrarindex.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/manager/Adminindex.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-index.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/wj-add.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/entity/Score.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-paperscore.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/bzr/cs-score-list-v.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/controllerCRM/JobAPIController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/JwWebController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/util/SendUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/config/Config.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/interceptor/MyInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/DownLoadService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/LoginService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/gem/xmgc/service/TaskServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TaskMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/TaskService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-tasklistedit.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/SxsTaskController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/PaperInfoMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/ManagerItemsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/XmgcApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/AccountAllMapper.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/gem/xmgc/XmgcApplicationTests.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/PaperService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TitleListMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TitleListMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/ClazzMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/ClazzServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/SubjectCheckMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/XmgcManagerItemsController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-welcome.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gem/xmgc/config/ManagerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/manager/welcome.html" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\Users\YangTao\.m2\repository" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="11" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="11" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1194" />
+    <option name="y" value="234" />
+    <option name="width" value="1694" />
+    <option name="height" value="1068" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.gem.xmgc.service" />
+      <recent name="com.gem.xmgc.mapper" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IDEAplace\xmgc\src\main\resources\static\images" />
+      <recent name="C:\Users\90479\Desktop\最终项目\xmgc\src\main\java\com\gem\xmgc\entity" />
+      <recent name="C:\Users\90479\Desktop\最终项目\xmgc\src\main\java\com\gem\xmgc\mapper" />
+      <recent name="C:\Users\90479\Desktop\最终项目\xmgc\src\main\java\com\gem\xmgc\service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gem.xmgc.controllerCRM" />
+      <recent name="com.gem.xmgc.web" />
+      <recent name="com.gem.xmgc.CRMentity" />
+      <recent name="com.gem.xmgc.util" />
+      <recent name="com.gem.xmgc.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\90479\Desktop\xmgc1\xmgc\src\main\resources\templates\xmgcmanager" />
+      <recent name="C:\Users\90479\Desktop\xmgc1\xmgc\src\main\resources\templates" />
+      <recent name="C:\Users\90479\Desktop\xmgc1\xmgc\src\main\java\com\gem\xmgc\web" />
+      <recent name="C:\Users\90479\Desktop\xmgc1\xmgc\src\main\java\com\gem\xmgc\util" />
+      <recent name="C:\Users\90479\Desktop\xmgc1\xmgc\src\main\java\com\gem\xmgc\mapper" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.gem.xmgc.service" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.XmgcApplication">
+    <configuration name="APITest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xmgc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gem.xmgc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gem.xmgc.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gem.xmgc.service.APITest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="APITest.function" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xmgc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gem.xmgc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gem.xmgc.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gem.xmgc.service.APITest" />
+      <option name="METHOD_NAME" value="function" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AccountServiceTest.context" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xmgc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gem.xmgc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gem.xmgc.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gem.xmgc.service.AccountServiceTest" />
+      <option name="METHOD_NAME" value="context" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceImplTest.f" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xmgc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gem.xmgc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gem.xmgc.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gem.xmgc.service.TaskServiceImplTest" />
+      <option name="METHOD_NAME" value="f" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceImplTest.findTaskTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="xmgc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gem.xmgc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gem.xmgc.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gem.xmgc.service.TaskServiceImplTest" />
+      <option name="METHOD_NAME" value="findTaskTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XmgcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="xmgc" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gem.xmgc.XmgcApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TaskServiceImplTest.findTaskTest" />
+        <item itemvalue="JUnit.APITest.function" />
+        <item itemvalue="JUnit.APITest" />
+        <item itemvalue="JUnit.TaskServiceImplTest.f" />
+        <item itemvalue="JUnit.AccountServiceTest.context" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\90479\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc21022b-0dea-4362-9849-bdb5408bae41" name="Default Changelist" comment="" />
+      <created>1571139453476</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1571139453476</updated>
+      <workItem from="1571139456330" duration="3820000" />
+      <workItem from="1571143449745" duration="8000" />
+      <workItem from="1571143496511" duration="2921000" />
+      <workItem from="1571185076030" duration="7000" />
+      <workItem from="1571387603589" duration="6214000" />
+      <workItem from="1571444301879" duration="1340000" />
+      <workItem from="1571471253782" duration="3655000" />
+      <workItem from="1571618598322" duration="3450000" />
+      <workItem from="1571638538405" duration="8011000" />
+      <workItem from="1571651509074" duration="1008000" />
+      <workItem from="1571652724390" duration="2000" />
+      <workItem from="1571653147937" duration="1519000" />
+      <workItem from="1571654748975" duration="5139000" />
+      <workItem from="1571662238370" duration="2735000" />
+      <workItem from="1571703977657" duration="87000" />
+      <workItem from="1571705502694" duration="1976000" />
+      <workItem from="1571712611313" duration="14660000" />
+      <workItem from="1571809182618" duration="599000" />
+      <workItem from="1571810555902" duration="1095000" />
+      <workItem from="1571813661662" duration="2332000" />
+      <workItem from="1571825942374" duration="10947000" />
+      <workItem from="1571876515617" duration="11659000" />
+      <workItem from="1571888646565" duration="25255000" />
+      <workItem from="1571963618369" duration="21671000" />
+      <workItem from="1572053070619" duration="14112000" />
+      <workItem from="1572073226434" duration="14412000" />
+      <workItem from="1572089494053" duration="1272000" />
+      <workItem from="1572162599597" duration="6608000" />
+      <workItem from="1572222183738" duration="45814000" />
+      <workItem from="1572308621536" duration="37231000" />
+      <workItem from="1572394740424" duration="38137000" />
+      <workItem from="1572480873564" duration="61865000" />
+      <workItem from="1572656738190" duration="23046000" />
+      <workItem from="1572745817914" duration="8854000" />
+      <workItem from="1572869143074" duration="7002000" />
+      <workItem from="1572914407129" duration="33953000" />
+      <workItem from="1573000433955" duration="31161000" />
+      <workItem from="1573086668377" duration="40847000" />
+      <workItem from="1573172840853" duration="22893000" />
+      <workItem from="1573204117008" duration="3885000" />
+      <workItem from="1573261268348" duration="21708000" />
+      <workItem from="1573347778298" duration="12415000" />
+      <workItem from="1573381468450" duration="628000" />
+      <workItem from="1573433218558" duration="22012000" />
+      <workItem from="1573518655590" duration="3520000" />
+      <workItem from="1573527758071" duration="9000" />
+      <workItem from="1573692781648" duration="599000" />
+      <workItem from="1574073737052" duration="11972000" />
+      <workItem from="1574140788090" duration="31000" />
+      <workItem from="1574141331379" duration="3552000" />
+      <workItem from="1574162237490" duration="599000" />
+      <workItem from="1574209954367" duration="4028000" />
+      <workItem from="1574582131978" duration="1021000" />
+      <workItem from="1574767033640" duration="374000" />
+      <workItem from="1575265859103" duration="6657000" />
+      <workItem from="1575426906686" duration="1890000" />
+      <workItem from="1576201949522" duration="2044000" />
+      <workItem from="1576743384672" duration="1324000" />
+      <workItem from="1577404494528" duration="6072000" />
+      <workItem from="1577673473839" duration="651000" />
+      <workItem from="1577758917518" duration="1000" />
+      <workItem from="1577763000016" duration="31000" />
+      <workItem from="1577778016084" duration="962000" />
+      <workItem from="1577782102169" duration="2988000" />
+      <workItem from="1577943474755" duration="2276000" />
+      <workItem from="1577955420836" duration="728000" />
+      <workItem from="1578274954039" duration="1544000" />
+      <workItem from="1578377965266" duration="120000" />
+      <workItem from="1578454472218" duration="3397000" />
+      <workItem from="1578462223541" duration="542000" />
+      <workItem from="1578462794592" duration="126000" />
+      <workItem from="1578462944673" duration="5020000" />
+      <workItem from="1578468654656" duration="565000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="APITest_function - 2019.11.09 at 10h 28m 54s.xml">
+      <configuration name="APITest.function" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="APITest_function - 2019.11.09 at 10h 29m 31s.xml">
+      <configuration name="APITest.function" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="APITest_function - 2019.11.09 at 10h 31m 15s.xml">
+      <configuration name="APITest.function" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="APITest_function - 2019.11.09 at 10h 38m 24s.xml">
+      <configuration name="APITest.function" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="APITest_function - 2019.11.09 at 10h 42m 04s.xml">
+      <configuration name="APITest.function" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TaskServiceImplTest_findTaskTest - 2019.12.02 at 14h 19m 01s.xml">
+      <configuration name="TaskServiceImplTest.findTaskTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TaskServiceImplTest_findTaskTest - 2019.12.02 at 14h 21m 46s.xml">
+      <configuration name="TaskServiceImplTest.findTaskTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TaskServiceImplTest_findTaskTest - 2019.12.02 at 14h 22m 24s.xml">
+      <configuration name="TaskServiceImplTest.findTaskTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TaskServiceImplTest_findTaskTest - 2019.12.02 at 14h 23m 40s.xml">
+      <configuration name="TaskServiceImplTest.findTaskTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TaskServiceImplTest_findTaskTest - 2019.12.02 at 14h 26m 48s.xml">
+      <configuration name="TaskServiceImplTest.findTaskTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="640610000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-6" y="-6" width="1293" height="773" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49723756" visible="true" weight="0.24237686" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.50276244" side_tool="true" weight="0.20735608" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.123390555" />
+      <window_info anchor="bottom" id="Terminal" order="2" weight="0.32939914" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49804536" weight="0.26917294" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.39914164" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5019547" side_tool="true" weight="0.75150603" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3945783" />
+      <window_info anchor="bottom" id="Problems" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Java Enterprise" order="14" weight="0.07618026" />
+      <window_info anchor="bottom" id="Version Control" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Database" order="8" weight="0.32957748" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="xmgc" />
+    <option name="LAST_COMMIT_MESSAGE" value="xmgc" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/StudentMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/SearchPaperTypeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/ScoreMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/ScoreMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/StudentMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/SxsTaskController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="223" column="13" lean-forward="true" selection-start-line="223" selection-start-column="13" selection-end-line="223" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/PaperDetailMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/ManageMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/gem/xmgc/service/TaskServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TaskMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/AccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/gem/xmgc/service/PaperServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TaskDetailMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/AllScoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/PaperInfoMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-tasklistadd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-writtenresult.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-titledetail.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-taskupload.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-taskview.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/PaperService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="86" column="44" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TitleListMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/TitleListMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" selection-start-line="4" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/entity/HwAnswer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/entity/Clazz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-taskdetail.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/ClazzMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/service/ClazzServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2156">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+          <folding>
+            <element signature="e#7167#7168#0" expanded="true" />
+            <element signature="e#7222#7223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/SubjectCheckMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/XmgcManagerItemsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/gem/xmgc/XmgcApplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/NewClassDetailMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/XmgcApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2197" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/phrase.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="63" column="20" lean-forward="true" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/bg.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/web/WrittenIntervieController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/aiwrap.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/xmgcmanager/Adminindex.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462" />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/springframework/spring-webmvc/5.2.0.RELEASE/spring-webmvc-5.2.0.RELEASE.jar!/org/springframework/web/servlet/config/annotation/WebMvcConfigurer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-tasklistedit.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/x-admin.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/mapper/PaperInfoMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/manager/welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding>
+            <element signature="n#style#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gem/xmgc/config/ManagerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="90" column="18" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
+          <folding>
+            <element signature="e#681#682#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-154">
+          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/sxs/Trainer-welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="44" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/commons.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>

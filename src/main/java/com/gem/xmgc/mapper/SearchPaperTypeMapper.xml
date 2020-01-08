@@ -1,0 +1,10 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.SearchPaperTypeMapper">
+    <select id="selectSearchUseInfo" resultType="searchpapertype">
+        select s.id, c.c_id, st.t_name,s.usedate,sp.name from searchuseinfo s join searchpapertype st on s.sid=st.id
+        join class c on s.cid=c.id join searchpaperstatu sp on s.flag=sp.id
+        where s.statu=0
+    </select>
+</mapper>

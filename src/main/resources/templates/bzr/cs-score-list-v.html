@@ -1,0 +1,170 @@
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <title>欢迎页面-X-admin2.1</title>
+      <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">学生成绩</a>
+        <a><cite>测试成绩</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+          <input type="text" id="studentName"  placeholder="请输入姓名" autocomplete="off" class="layui-input">
+<!--          <div class="layui-input-inline">-->
+<!--			<select name="contrller">-->
+<!--				<option>JavaEE</option>-->
+<!--				<option>JavaSE</option>-->
+<!--			</select>-->
+<!--		  </div>-->
+		  <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+      </div>
+      <xblock>
+        <form style="display: inline-block" class="layui-form" enctype="multipart/form-data" th:action="@{/headTeacher/score/downLoad}" method="post">
+          <input type="hidden" name="type" value="StudentScore"/>
+          <input type="hidden" id="cid" name="cid" value=""/>
+          <input type="hidden" name="excelName" value="StudentScore"/>
+          <input type="hidden" name="excel" value="学生成绩"/>
+          <input type="hidden" name="sheet" value="studentScoreList"/>
+          <input class="layui-btn" type="submit"  value="下载"/>
+        </form>
+        <!-- <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','../member-add.html',600,400)"><i class="layui-icon"></i>添加</button> -->
+<!--        <span class="x-right" style="line-height:40px">共有数据：88 条</span>-->
+      </xblock>
+      <table class="layui-table x-admin" id="students-data">
+        <thead>
+          <tr>
+            <th>学员编号
+            </th>
+            <th>学员姓名</th>
+<!--            <th v-for="(value,key) in names">{{key}}</th>-->
+			<th>操作</th>
+			</tr>
+        </thead>
+        <tbody>
+          <tr v-for="student in students">
+            <td>{{student.id}}</td>
+            <td>{{student.sname}}</td>
+<!--              <td v-for="value in score.tsmap">{{value}}</td>-->
+			<!--<td v-for="(key,value) in score.tsmap">{{key}}</td>
+            <td v-for="(key,value) in score.tsmap">{{value}}</td>-->
+			<td class="td-manage">
+				<button v-bind:id="student.id" class="layui-btn" onclick="x_admin_show('成绩详情','/headTeacher/cs-details?id='+id,600,400)">详情</button>
+			</td>
+          </tr>
+        </tbody>
+      </table>
+      <div th:replace="bzr/page::footer"></div>
+
+    </div>
+    <script>
+        var vue = new Vue({
+            el: '#students-data',
+            data: {
+                students: null,
+                // names:null
+            }
+        });
+
+        $.ajax({
+            type : "post",
+            data: {'id':$("#clazzId",parent.document).attr('value')},
+            url : base + '/headTeacher/student/list',
+            async: false,
+            success :function (data) {
+                vue.students = data.records;
+                vue1.current = data.current;
+                vue1.pages = data.pages;
+            }
+        });
+        $("#cid").val($("#clazzId",parent.document).attr('value'));
+        $("#page-data").on('click','a',function () {
+            $.ajax({
+                type : "post",
+                data: {'id':$("#clazzId",parent.document).attr('value'),'current':this.id,'studentName':$("#studentName").val()},
+                url : base + '/headTeacher/student/list',
+                async: false,
+                success :function (data) {
+                    vue.students = data.records;
+                    vue1.current = data.current;
+                    vue1.pages = data.pages;
+                }
+            });
+        })
+      layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
+
+
+
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <script>
+        layui.use(['form','layer'], function() {
+            $=layui.jquery;
+            var form = layui.form;
+            layer=layui.layer;
+            //监听提交
+            form.on('submit(sreach)',function (data) {
+                console.log(data)
+                $.ajax({
+                    type : "post",
+                    data: {'id':$("#clazzId",parent.document).attr('value'),'studentName':$("#studentName").val()},
+                    url : base + '/headTeacher/student/list',
+                    async: false,
+                    success :function (data) {
+                        vue.students = data.records;
+                        vue1.current = data.current;
+                        vue1.pages = data.pages;
+                    }
+                });
+            });
+        });
+    </script>
+  </body>
+
+</html>

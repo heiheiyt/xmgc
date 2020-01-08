@@ -1,0 +1,230 @@
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>欢迎页面-X-admin2.1</title>
+    <div th:replace="commons::header"></div>
+  </head>
+  
+  <body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <!-- <a href="">首页</a> -->
+        <a href="">学生就业</a>
+        <a>
+          <cite>就业详情</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+          <!-- <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+          <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end"> -->
+          <input id="studentName" type="text" name="username"  placeholder="请输入姓名" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+      </div>
+      <xblock id="class-id">
+        <input v-if="classid!=''" class="layui-btn" id="file" type="file" />
+        <button v-if="classid!=''" class="layui-btn" id="uploadimg" type="button">上传</button>
+        <form style="display: inline-block" class="layui-form" enctype="multipart/form-data" th:action="@{/headTeacher/student/downLoad}" method="post">
+          <input type="hidden" name="type" value="StudentView"/>
+          <input type="hidden" id="cid" name="cid" value=""/>
+          <input type="hidden" name="excelName" value="StudentView"/>
+          <input type="hidden" name="excel" value="学生账号"/>
+          <input type="hidden" name="sheet" value="studentViewList"/>
+          <input class="layui-btn" type="submit"  value="下载"/>
+        </form>
+        <button v-if="classid!=''" class="layui-btn" onclick="x_admin_show('添加账号','/headTeacher/zh-add?cid='+cid,600,400)">添加</button>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+<!--        <span class="x-right" style="line-height:40px">共有数据：88 条</span>-->
+      </xblock>
+      <table class="layui-table x-admin" id="accountNumbers-data">
+        <thead>
+          <tr>
+            <th>
+              <!--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+-->            </th>
+            <th>账号</th>
+            <th>名字</th>
+            <th>操作</th>
+			</tr>
+        </thead>
+        <tbody>
+          <tr v-for="accountNumber in accountNumbers" v-bind:id="accountNumber.id">
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" v-bind:data-id='accountNumber.id'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{{accountNumber.sid}}</td>
+            <td>{{accountNumber.sname}}</td>
+			<td class="td-manage">
+				<button v-bind:id="accountNumber.id" class="layui-btn" onclick="x_admin_show('修改账号','/headTeacher/zh-details?id='+id,600,400)">修改</button>
+				<button class="layui-btn layui-btn-danger" onclick="member_del(this,'要删除的id')">删除</button>
+			</td>
+          </tr>
+        </tbody>
+      </table>
+      <div th:replace="bzr/page::footer"></div>
+    </div>
+    <script>
+      var cid = $("#clazzId",parent.document).attr('value');
+      var vue = new Vue({
+        el: '#accountNumbers-data',
+        data: {
+          accountNumbers: null,
+        }
+      });
+      var vue2 = new Vue({
+        el: '#class-id',
+        data: {
+          classid: null,
+        }
+      });
+      function getQueryVariable(variable)
+      {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+          if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+      }
+
+      $.ajax({
+        type : "post",
+        data: {'id':$("#clazzId",parent.document).attr('value')},
+        url : base + '/headTeacher/student/list',
+        async: false,
+        success :function (data) {
+          vue.accountNumbers = data.records;
+          vue1.current = data.current;
+          vue1.pages = data.pages;
+          vue2.classid = $("#clazzId",parent.document).attr('value');
+        }
+      });
+      $("#cid").val($("#clazzId",parent.document).attr('value'));
+      $("#page-data").on('click','a',function () {
+        $.ajax({
+          type : "post",
+          data: {'id':$("#clazzId",parent.document).attr('value'),'current':this.id,'studentName':$("#studentName").val()},
+          url : base + '/headTeacher/student/list',
+          async: false,
+          success :function (data) {
+            vue.accountNumbers = data.records;
+            vue1.current = data.current;
+            vue1.pages = data.pages;
+          }
+        });
+      })
+      layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
+
+
+
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+            $.ajax({
+              type : "post",
+              //获取父级元素tr的id
+              data: {'id':$(obj).parents("tr").attr("id")},
+              url : base + '/headTeacher/student/remove',
+              async: false,
+              success :function (data) {
+                $(obj).parents("tr").remove();
+                location.replace(location.href);
+              }
+            });
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+          $.ajax({
+            type : "get",
+            //获取父级元素tr的id
+            data: {'ids':data},
+            url : base + '/headTeacher/student/removeBatch',
+            async: false,
+            success :function (data) {
+              location.replace(location.href);
+              $(".layui-form-checked").not('.header').parents('tr').remove();
+            }
+          });
+            layer.msg('删除成功', {icon: 1});
+        });
+      }
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script>
+    <script>
+      layui.use(['form','layer'], function() {
+        $=layui.jquery;
+        var form = layui.form;
+        layer=layui.layer;
+        //监听提交
+        form.on('submit(sreach)',function (data) {
+          console.log(data)
+          $.ajax({
+            url : base + "/headTeacher/student/sreach",
+            data:{'id':$("#clazzId",parent.document).attr('value'), 'studentName':$("#studentName").val()},
+            method: "get",
+            success: function (data) {
+              vue.accountNumbers = data.records;
+              vue1.current = data.current;
+              vue1.pages = data.pages;
+            }
+          })
+        });
+      });
+    </script>
+    <script>
+      $("#uploadimg").on("click", function () {
+        var file = $('#file')[0].files[0];
+        var formData = new FormData();
+        formData.append("file_data", file);
+        formData.append("type", "StudentView");
+        formData.append("cid", $("#clazzId",parent.document).attr('value'));
+        $("#file")[0].outerHTML=$("#file")[0].outerHTML;
+        $.ajax({
+          url: base + '/headTeacher/student/upLoad',//请求路径
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            location.replace(location.href);
+          },
+          error: function (err) {
+            alert("上传有误")
+          }
+        });
+      });
+    </script>
+  </body>
+
+</html>

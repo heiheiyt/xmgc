@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.xmgc.mapper.ScoreMapper">
+    <select id="findStudentScoresByStudentId" resultMap="sSMap">
+        select st.s_name,p.p_name, s.score from student st left join score s on st.id = s.s_id left join usepaper u on s.u_id = u.id join paperinfo p on u.p_id = p.id ${ew.customSqlSegment} and s.statu = 0
+    </select>
+    <resultMap id="sSMap" type="studentScore">
+        <result property="sname" column="s_name"/>
+        <collection property="scores" ofType="scoreView">
+            <result property="pname" column="p_name"/>
+            <result property="score" column="score"/>
+        </collection>
+    </resultMap>
+
+</mapper>
